@@ -3,7 +3,7 @@
 ## 23/03/2023
 Presentes: Alexsander, David, Gustavo, Mateus, Moisés
 
-* Engine: Godot
+* Engine: Godot 
 * Estilo: "Contra/Metal Slug"
 * "bicho escroto vs. humanos"
 * Controlador dos merges: Alexsander
