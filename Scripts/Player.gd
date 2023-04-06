@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const _gravity = -4000.0
+const _gravity = 4000.0
 const _speed = Vector2(400.0, 1000.0)
 const _acceleration = Vector2(20.0, 0.0)
 const _deceleration = Vector2(0.15, 0.0) # Range between [0.0, 1.0]
@@ -41,7 +41,7 @@ func calculate_velocity(linearVelocity: Vector2,
 
 	# Jump
 	if direction.y > 0.0:
-		outVelocity.y -= _gravity * delta
+		outVelocity.y += _gravity * delta
 
 	# Fall
 	if direction.y < 0.0:
