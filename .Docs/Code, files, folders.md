@@ -8,6 +8,7 @@
 
 ### Cases e nomes
 * Variáveis: camelCase
+* Variáveis privadas: _camelCase
 * Funções: snake_case
 * Consts, enums: UPPER_CASE
 * Classes: PascalCase
