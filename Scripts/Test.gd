@@ -4,4 +4,4 @@ extends Node2D
 # @TODO: Input Maps use snake_case naming to match GODOT's
 
 func _ready() -> void:
-	pass
+    pass
