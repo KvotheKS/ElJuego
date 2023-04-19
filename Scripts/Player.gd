@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const _gravity = 2500.0
+const _gravity = 2000.0
 const _maxSpeed = Vector2(400.0, 500.0)
 const _maxFallSpeed = 500
 const _acceleration = Vector2(20.0, 200.0)
@@ -42,16 +42,43 @@ func _process(delta):
     pass  
     
 func animate(delta):
+    var curScale = $MechRig.scale.x
+    var cursorPos = get_global_mouse_position()
+    var playerPos = position
     
-    if(get_viewport().get_mouse_position().x < position.x):
+    if(cursorPos < playerPos):
+        if curScale ==  1:
+            characterLean = 0.5
         $MechRig.scale.x = -1
     else:
+        if curScale ==  -1:
+            characterLean = -0.5
         $MechRig.scale.x = 1 
     
     if(direction.x > 0): characterLean = min(characterLean+(5*delta),1)
-            
     if(direction.x < 0): characterLean = max(characterLean-(5*delta),-1)
     
+    
+
+    var aimVector = cursorPos - playerPos
+    var lookVector = cursorPos - $MechRig/Torso/Head.global_position
+    aimVector = aimVector.rotated(deg2rad(-90))
+    lookVector = lookVector.rotated(deg2rad(-90))
+    
+    var aimAngle = rad2deg(atan2(aimVector.y, aimVector.x))
+    var lookAngle = rad2deg(atan2(lookVector.y, lookVector.x))
+    print(lookAngle)
+    
+    if(curScale == 1):
+#        $MechRig/AnimationPlayer.play("look")
+#        $MechRig/AnimationPlayer.seek((lookAngle+17-$MechRig/Torso.rotation_degrees)/-180,true)
+        $MechRig/AnimationPlayer.play("aim")
+        $MechRig/AnimationPlayer.seek((aimAngle+17-$MechRig/Torso.rotation_degrees)/-180,true)
+    else:
+      
+        $MechRig/AnimationPlayer.play("aim")
+        $MechRig/AnimationPlayer.seek((aimAngle-$MechRig/Torso.rotation_degrees)/180,true)
+        
     if(!is_on_floor()):
         $MechRig/AnimationPlayer.play("MoveUpward")
         $MechRig/AnimationPlayer.seek(velocity.y/_maxFallSpeed*2+0.5,true)
@@ -73,7 +100,8 @@ func animate(delta):
     
     if is_on_floor() and hasJumped:
         $MechRig/AnimationPlayer.play("RESET")
-     
+    
+    
 func calculate_velocity(linearVelocity: Vector2, 
                         direction: Vector2,
                         delta: float) -> Vector2:

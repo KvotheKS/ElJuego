@@ -5,3 +5,10 @@ extends Node2D
 
 func _ready() -> void:
     pass
+
+func _physics_process(delta):
+    $Sprite.position.x = get_global_mouse_position().x
+    $Sprite.position.y = get_global_mouse_position().y
+    
+    $Sprite2.position = $Player/MechRig/Torso/Head.global_position
+ 
