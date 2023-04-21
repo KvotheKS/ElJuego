@@ -44,7 +44,7 @@ func _process(delta):
 func animate(delta):
     var curScale = $MechRig.scale.x
     var cursorPos = get_global_mouse_position()
-    var playerPos = position
+    var playerPos = global_position
     
     if(cursorPos < playerPos):
         if curScale ==  1:
@@ -56,34 +56,31 @@ func animate(delta):
         $MechRig.scale.x = 1 
     
     if(direction.x > 0): characterLean = min(characterLean+(5*delta),1)
-    if(direction.x < 0): characterLean = max(characterLean-(5*delta),-1)
+    elif(direction.x < 0): characterLean = max(characterLean-(5*delta),-1)
+    else:
+        if(characterLean>0): characterLean = max(characterLean-(3*delta),0)
+        else: characterLean = min(characterLean+(3*delta),0)
     
     
 
     var aimVector = cursorPos - playerPos
-    var lookVector = cursorPos - $MechRig/Torso/Head.global_position
     aimVector = aimVector.rotated(deg2rad(-90))
-    lookVector = lookVector.rotated(deg2rad(-90))
-    
     var aimAngle = rad2deg(atan2(aimVector.y, aimVector.x))
-    var lookAngle = rad2deg(atan2(lookVector.y, lookVector.x))
-    print(lookAngle)
+
     
     if(curScale == 1):
-#        $MechRig/AnimationPlayer.play("look")
-#        $MechRig/AnimationPlayer.seek((lookAngle+17-$MechRig/Torso.rotation_degrees)/-180,true)
         $MechRig/AnimationPlayer.play("aim")
-        $MechRig/AnimationPlayer.seek((aimAngle+17-$MechRig/Torso.rotation_degrees)/-180,true)
+        $MechRig/AnimationPlayer.seek((aimAngle+22-$MechRig/Torso.rotation_degrees)/-180,true)
     else:
       
         $MechRig/AnimationPlayer.play("aim")
-        $MechRig/AnimationPlayer.seek((aimAngle-$MechRig/Torso.rotation_degrees)/180,true)
-        
+        $MechRig/AnimationPlayer.seek((aimAngle-22+$MechRig/Torso.rotation_degrees)/180,true)
+    
+    
+    
     if(!is_on_floor()):
         $MechRig/AnimationPlayer.play("MoveUpward")
         $MechRig/AnimationPlayer.seek(velocity.y/_maxFallSpeed*2+0.5,true)
-
-   
     else:   
         if(characterLean<0):
             if($MechRig.scale.x>0):$MechRig/AnimationPlayer.play("moveBackward")
@@ -96,10 +93,9 @@ func animate(delta):
             $MechRig/AnimationPlayer.seek(characterLean,true)
             $MechRig/AnimationPlayer.stop()
             
-        
-    
-    if is_on_floor() and hasJumped:
-        $MechRig/AnimationPlayer.play("RESET")
+#
+#    if is_on_floor() and hasJumped:
+#        $MechRig/AnimationPlayer.play("RESET")
     
     
 func calculate_velocity(linearVelocity: Vector2, 

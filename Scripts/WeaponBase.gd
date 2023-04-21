@@ -1,12 +1,13 @@
 extends Node2D
 
 #shots per second
-var firingSpeed = 2
+var firingSpeed = 10
 var canFire = false 
 var firePoint = Vector2()
 
 
 func _ready():
+    #!!does not work, firing speed has to me changed before ready, and ready is called before its parents
     $cooldown.wait_time = (1.0/firingSpeed)
     $cooldown.start()
 

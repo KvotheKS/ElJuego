@@ -25,3 +25,6 @@ frames = SubResource( 2 )
 playing = true
 
 [node name="TowardtMB" parent="." index="2" instance=ExtResource( 3 )]
+
+[node name="Duration" parent="." index="3"]
+autostart = true

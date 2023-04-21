@@ -1,17 +1,15 @@
 extends "res://Scripts/ProjectileBase.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
     $TowardtMB.init(projectileSpeed)
     pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func death():
+    if(deathEffect):
+        var deinstance = deathEffect.instance()
+        deinstance.position = position
+        get_parent().add_child(deinstance)
