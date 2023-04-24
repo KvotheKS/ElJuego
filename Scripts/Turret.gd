@@ -24,4 +24,6 @@ func shoot(target: Vector2):
 
 	# Shoot the target
 	bullet.position = $Node2D/Position2D.global_position
-	bullet._velocity = target - bullet.position
+	var angle = (target - bullet.position).angle_to(bullet.position)
+	bullet._velocity = Vector2(bullet._speed, bullet._speed).rotated(-angle)
+	return
