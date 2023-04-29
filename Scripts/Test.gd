@@ -4,8 +4,9 @@ extends Node2D
 # @TODO: Input Maps use snake_case naming to match GODOT's
 
 func _ready() -> void:
-	pass
+    pass
 
 # Sends player position to the turret
 func _process(_delta):
-	$Turret._playerPosition = $Player.position
+#    $Turret._playerPosition = $Player.position
+    $Turret._playerPosition = Vector2(200,200)
