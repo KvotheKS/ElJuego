@@ -1472,7 +1472,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -21.3, -47.0 ]
+"values": [ -21.3, -20.8 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Torso/Hip/Bleg/Bknee:position")
@@ -1496,7 +1496,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 31.6, 67.4 ]
+"values": [ 31.6, 61.1 ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("Torso/Hip/Fleg/Fknee:position")
@@ -1568,7 +1568,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -9.9, -16.1 ]
+"values": [ -9.9, -35.9 ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("Torso/Hip/Fleg/Fknee/Ffeet:position")
@@ -1592,7 +1592,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -13.7, -37.2 ]
+"values": [ -13.7, -38.0 ]
 }
 tracks/16/type = "value"
 tracks/16/path = NodePath("Torso/Head:position")

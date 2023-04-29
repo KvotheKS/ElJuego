@@ -1,16 +1,47 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Sprites/_TheTrashBin/enemy.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Turret.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+const _bulletPath = preload(\"res://Scenes/Projectiles/TurretBullet.tscn\")
+
+var _playerPosition = null # Current player position (updated at Test.gd)
+var _shotsPerSecond = 5
+var _cooldownTimer = 0.0
+
+func _process(delta):
+
+    # Turret always looks at the player
+    $Node2D.look_at(_playerPosition)
+
+    _cooldownTimer += delta
+    if _cooldownTimer >= 1.0 / _shotsPerSecond:
+        _cooldownTimer = 0
+        shoot(_playerPosition)
+
+func shoot(target: Vector2):
+
+    # Create a bullet
+    var bullet = _bulletPath.instance()
+    get_parent().add_child(bullet)
+
+    # Shoot the target
+    bullet.position = $Node2D/Position2D.global_position
+    var angle = (target - bullet.position).angle_to(bullet.position)
+    bullet._velocity = Vector2(bullet._speed, bullet._speed).rotated(-angle)
+    return
+"
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 7 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 position = Vector2( 116, 120 )
-script = ExtResource( 2 )
+script = SubResource( 2 )
 
-[node name="Enemy" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.177419, 0.177419 )
 texture = ExtResource( 1 )
 

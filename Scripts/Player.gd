@@ -1,4 +1,5 @@
-extends KinematicBody2D
+extends "res://Scripts/Entity.gd"
+
 
 const _gravity = 2000.0
 const _maxSpeed = Vector2(400.0, 500.0)
@@ -21,11 +22,10 @@ var hasJumped = true
 
 var characterLean = 0
 var direction = Vector2.ZERO  
-var velocity = Vector2.ZERO 
+
 
 # Called every frame
 func _physics_process(delta: float) -> void:
-<<<<<<< HEAD
 #    print(jetpackHeat)
     isJumpInterrupted = Input.is_action_just_released("jump")
     direction = Input.get_vector("move_left","move_right","ui_up","ui_down")
@@ -67,36 +67,6 @@ func animate(delta):
     var aimVector = cursorPos - playerPos
     aimVector = aimVector.rotated(deg2rad(-90))
     var aimAngle = rad2deg(atan2(aimVector.y, aimVector.x))
-    
-    
-    
-=======
-    _isJumpInterrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
-    var direction = get_direction()
-
-    _velocity = calculate_velocity(_velocity, direction, delta)
-    _velocity = move_and_slide(_velocity, Vector2.UP)
-
-    _jetpackOverheat = calculate_jetpack_overheat(_jetpackOverheat,
-                                                  _jetpackCooldownDelay,
-                                                  _jetpackCooldownRate,
-                                                  delta)
-
-    print("Overheat: %.2f" % _jetpackOverheat)
-
-func get_direction() -> Vector2:
-    return Vector2(get_horizontal_direction(), get_vertical_direction())
-
-func get_horizontal_direction() -> float:
-    return Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-
-func get_vertical_direction() -> float:
-    if Input.is_action_just_pressed("jump") and is_on_floor():
-        return -1.0
-
-    else:
-        return 1.0
->>>>>>> feat/enemy_turret
 
         
     if(curScale == 1):
@@ -145,25 +115,16 @@ func calculate_velocity(linearVelocity: Vector2,
 
     # Move right
     if direction.x > 0.0:
-<<<<<<< HEAD
         outVelocity.x = min(outVelocity.x + _acceleration.x, _maxSpeed.x)
 
     # Move left
     elif direction.x < 0.0:
         outVelocity.x = max(outVelocity.x - _acceleration.x, -_maxSpeed.x)
-=======
-        outVelocity.x = min(outVelocity.x + _acceleration.x, _speed.x)
-
-    # Move left
-    elif direction.x < 0.0:
-        outVelocity.x = max(outVelocity.x - _acceleration.x, -_speed.x)
->>>>>>> feat/enemy_turret
 
     # Stop
     else:
         outVelocity.x = lerp(outVelocity.x, 0.0, _deceleration.x)
 
-<<<<<<< HEAD
     # Fall 
     outVelocity.y = min(outVelocity.y+_gravity*delta,_maxFallSpeed)
         
@@ -188,32 +149,6 @@ func calculate_velocity(linearVelocity: Vector2,
     if is_on_floor():
         hasJumped = false 
 
-=======
-    # Fall
-    if direction.y > 0.0:
-        outVelocity.y += _gravity * delta
-
-    # Jump
-    if direction.y == -1.0:
-        outVelocity.y = _speed.y * -1.0
-
-    # Hover
-    if (not is_on_floor()) and Input.is_action_pressed("jump") and _hasJumped \
-        and _jetpackOverheat < _maxJetpackOverheat:
-        outVelocity.y = max(outVelocity.y - _acceleration.y, -_speed.y)
-        _jetpackOverheat = min(_jetpackOverheat + (_jetpackOverheatRate * delta), _maxJetpackOverheat)
-        _jetpackCooldownTimer = 0.0
-
-    # Stop jumping
-    if _isJumpInterrupted:
-        _hasJumped = true
-        outVelocity.y = 0.0
-
-    # Reset jump
-    if is_on_floor():
-        _hasJumped = false 
-
->>>>>>> feat/enemy_turret
     return outVelocity
 
 func calculate_jetpack_overheat(overheat: float,
@@ -222,26 +157,15 @@ func calculate_jetpack_overheat(overheat: float,
                                 delta: float) -> float:
 
     var outHeat = overheat
-<<<<<<< HEAD
     jetpackCooldownTimer = min(jetpackCooldownTimer + delta, delay)
 
     # Jetpack cooldown delay not over yet
     if jetpackCooldownTimer < delay:
-=======
-    _jetpackCooldownTimer = min(_jetpackCooldownTimer + delta, delay)
-
-    # Jetpack cooldown delay not over yet
-    if _jetpackCooldownTimer < delay:
->>>>>>> feat/enemy_turret
         return outHeat
 
     # Cooldown jetpack until 0 or until next use
     outHeat = max(outHeat - (cooldownRate * delta), 0.0)
-<<<<<<< HEAD
 
     return outHeat
 
-=======
 
-    return outHeat
->>>>>>> feat/enemy_turret
