@@ -66,17 +66,19 @@ func animate(delta):
     var aimVector = cursorPos - playerPos
     aimVector = aimVector.rotated(deg2rad(-90))
     var aimAngle = rad2deg(atan2(aimVector.y, aimVector.x))
-
     
+    
+    
+
+        
     if(curScale == 1):
         $MechRig/AnimationPlayer.play("aim")
         $MechRig/AnimationPlayer.seek((aimAngle+22-$MechRig/Torso.rotation_degrees)/-180,true)
+        
     else:
       
         $MechRig/AnimationPlayer.play("aim")
         $MechRig/AnimationPlayer.seek((aimAngle-22+$MechRig/Torso.rotation_degrees)/180,true)
-    
-    
     
     if(!is_on_floor()):
         $MechRig/AnimationPlayer.play("MoveUpward")
@@ -85,15 +87,24 @@ func animate(delta):
         if(characterLean<0):
             if($MechRig.scale.x>0):$MechRig/AnimationPlayer.play("moveBackward")
             else:   $MechRig/AnimationPlayer.play("moveFoward")
+            
             $MechRig/AnimationPlayer.seek(characterLean*-1,true)
             $MechRig/AnimationPlayer.stop()
         else:
             if($MechRig.scale.x<0):$MechRig/AnimationPlayer.play("moveBackward")
             else:   $MechRig/AnimationPlayer.play("moveFoward")
+            
             $MechRig/AnimationPlayer.seek(characterLean,true)
             $MechRig/AnimationPlayer.stop()
             
-#
+    var lookAngle 
+    print(aimAngle)
+    if(curScale == 1):
+        lookAngle = clamp(aimAngle,-100,-80)
+        $MechRig/Torso/Head.rotation_degrees = lookAngle-$MechRig/Torso.rotation_degrees+90
+    else:
+        lookAngle = clamp(aimAngle,80,100)
+        $MechRig/Torso/Head.rotation_degrees = -lookAngle-$MechRig/Torso.rotation_degrees+90
 #    if is_on_floor() and hasJumped:
 #        $MechRig/AnimationPlayer.play("RESET")
     
