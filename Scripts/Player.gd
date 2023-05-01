@@ -23,7 +23,9 @@ var hasJumped = true
 var characterLean = 0
 var direction = Vector2.ZERO  
 
-
+func _ready():
+    maxHealth = 100
+    health = maxHealth
 # Called every frame
 func _physics_process(delta: float) -> void:
 #    print(jetpackHeat)
@@ -40,7 +42,10 @@ func _physics_process(delta: float) -> void:
                                                 
     animate(delta)  
 func _process(delta):
-    pass  
+    if(Input.is_action_pressed("primary")):
+#        $DualShot.fire()    
+        $MechRig/Torso/Fshoulder/Farm/Fforearm/Gun/DualShot.fire()
+      
     
 func animate(delta):
     var curScale = $MechRig.scale.x
@@ -71,12 +76,12 @@ func animate(delta):
         
     if(curScale == 1):
         $MechRig/AnimationPlayer.play("aim")
-        $MechRig/AnimationPlayer.seek((aimAngle+22-$MechRig/Torso.rotation_degrees)/-180,true)
+        $MechRig/AnimationPlayer.seek((aimAngle+12-$MechRig/Torso.rotation_degrees)/-180,true)
         
     else:
       
         $MechRig/AnimationPlayer.play("aim")
-        $MechRig/AnimationPlayer.seek((aimAngle-22+$MechRig/Torso.rotation_degrees)/180,true)
+        $MechRig/AnimationPlayer.seek((aimAngle-12+$MechRig/Torso.rotation_degrees)/180,true)
     
     if(!is_on_floor()):
         $MechRig/AnimationPlayer.play("MoveUpward")
@@ -96,15 +101,13 @@ func animate(delta):
             $MechRig/AnimationPlayer.stop()
             
     var lookAngle 
-    print(aimAngle)
     if(curScale == 1):
         lookAngle = clamp(aimAngle,-100,-80)
         $MechRig/Torso/Head.rotation_degrees = lookAngle-$MechRig/Torso.rotation_degrees+90
     else:
         lookAngle = clamp(aimAngle,80,100)
         $MechRig/Torso/Head.rotation_degrees = -lookAngle-$MechRig/Torso.rotation_degrees+90
-#    if is_on_floor() and hasJumped:
-#        $MechRig/AnimationPlayer.play("RESET")
+
     
     
 func calculate_velocity(linearVelocity: Vector2, 
@@ -167,5 +170,7 @@ func calculate_jetpack_overheat(overheat: float,
     outHeat = max(outHeat - (cooldownRate * delta), 0.0)
 
     return outHeat
+
+
 
 

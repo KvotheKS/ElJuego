@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/MechRig.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Player/MECHart.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Weapons/DualShoter.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -1766,6 +1767,9 @@ animation = "Bhand"
 __meta__ = {
 "_edit_bone_": true
 }
+
+[node name="DualShot" parent="Torso/Fshoulder/Farm/Fforearm/Gun" instance=ExtResource( 3 )]
+position = Vector2( 20.9824, -5.0733 )
 
 [node name="Bshoulder" type="AnimatedSprite" parent="Torso"]
 show_behind_parent = true

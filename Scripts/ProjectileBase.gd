@@ -26,16 +26,18 @@ func _ready():
     $Duration.wait_time = duration
     
 func _process(delta):
-    pass
+    rotation = direction.angle()
+    if not $VisibilityNotifier2D.is_on_screen():
+        queue_free()
     
 ##################
 # Base Functions #
 ##################
 func UpdateStats():
     damage = baseDamage 
-    var l_scale = 1
-    
-    $CollisionShape2D.scale = Vector2(l_scale,l_scale)
+#    var l_scale = 1
+#
+#    $CollisionShape2D.scale = Vector2(l_scale,l_scale)
 
 func die():
     death()
@@ -46,6 +48,7 @@ func hanlde_hit():
         pierce -= 1
     else:
         die()
+    
 #####################
 # Derived Functions #
 #####################
@@ -60,3 +63,11 @@ func death():
 func _on_Duration_timeout():
     die()
     
+
+func _on_ProjectileBase_body_entered(body):
+    die()
+    
+func _on_ProjectileBase_area_entered(area):
+    if(area.get_collision_layer() == 1):
+        hanlde_hit()
+        area.get_parent().handle_damage(damage)

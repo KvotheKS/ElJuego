@@ -8,6 +8,10 @@ func _ready() -> void:
 
 # Sends player position to the turret
 func _process(_delta):
-#    $Turret._playerPosition = $Player.position
-    $Turret._playerPosition = Vector2(200,200)
+    $Turret._playerPosition = get_player_position()
   
+func get_player_position():
+    if($Player): 
+        return $Player.position
+    else:
+        return Vector2(0,0)

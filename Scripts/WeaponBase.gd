@@ -1,14 +1,15 @@
 extends Node2D
 
 #shots per second
-var firingSpeed = 10
-var canFire = false 
-var firePoint = Vector2()
+var firingSpeed = 1
+var canFire = false setget set_canFire  
+var projectiles = 1
+var spreadAngle = 0
+var precision = 100
 
 
 func _ready():
-    #!!does not work, firing speed has to me changed before ready, and ready is called before its parents
-    $cooldown.wait_time = (1.0/firingSpeed)
+    
     $cooldown.start()
 
 
@@ -17,7 +18,7 @@ func _process(delta):
     pass
   
 # this function must be defined on inheriting node
-func fire(count, spread, precision, speedVariation):
+func fire():
     assert(false, "define this fucntion on inheriting node")
    
 func muzzle_flash():
@@ -30,6 +31,11 @@ func get_target():
         return target
     return null
 
+func set_canFire(val):
+    canFire = val
+    if(!canFire):
+        $cooldown.wait_time = (1.0/firingSpeed)
+        $cooldown.start()
 
 func _on_cooldown_timeout():
     canFire = true

@@ -1,17 +1,21 @@
 extends "res://Scripts/WeaponBase.gd"
 
 var BULLET = preload("res://Scenes/Projectiles/BulletMedium.tscn")
+
 func _ready():
-   
-    pass # Replace with function body.
+    pass 
 
 
 func _process(delta):
     pass
    
 
-
-func fire(projectiles = 1, angle = 30, precision = 1, speedVariation = 0,durationVariation = 0.1):
+func fire():
+    projectiles = 1
+    spreadAngle = 30
+    precision = 1
+    
+    
     var rng = RandomNumberGenerator.new()
     rng.randomize()
 
@@ -24,13 +28,11 @@ func fire(projectiles = 1, angle = 30, precision = 1, speedVariation = 0,duratio
         var bullet = BULLET.instance()
        
         
-#        bullet.projectileSpeed = 200 + rng.randf_range(-speedVariation, speedVariation)
-        
-        bullet.get_node("Duration").wait_time = 0.2
+#        bullet.projectileSpeed = 200 + rng.randf_range(-speedVariation, speedVariation)     
         
 #        bullet.direction = Vector2(1,0).rotated(deg2rad((angle/(projectiles-1))*i-angle/2))   
         bullet.direction = ( get_global_mouse_position() - global_position ).normalized()
-        bullet.projectileSpeed = 1000
+   
         
         get_tree().root.get_child(0).add_child(bullet)
         bullet.position = global_position

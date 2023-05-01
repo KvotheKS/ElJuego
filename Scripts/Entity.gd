@@ -56,8 +56,7 @@ func _integrate_forces(state):
     move()
     
 func _process(delta):
-    pass
-#    $HealthBar.value = health
+    $HealthBar.value = health
     
 func _physics_process(delta):
    pass
