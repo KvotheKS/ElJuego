@@ -56,16 +56,10 @@ func _integrate_forces(state):
     move()
     
 func _process(delta):
-    pass
-#    $HealthBar.value = health
-    
+    $HealthBar.value = health
     
 func _physics_process(delta):
-#	if Performance.get_monitor(Performance.TIME_FPS) < 30:
-#		if randi() % 2 == 0:
-#			return
-    
-    velocity = Vector2.ZERO
+   pass
     
     
 func die():

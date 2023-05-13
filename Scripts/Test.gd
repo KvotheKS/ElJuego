@@ -5,3 +5,13 @@ extends Node2D
 
 func _ready() -> void:
     pass
+
+# Sends player position to the turret
+func _process(_delta):
+    $Turret._playerPosition = get_player_position()
+  
+func get_player_position():
+    if($Player): 
+        return $Player.position
+    else:
+        return Vector2(0,0)

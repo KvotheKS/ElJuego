@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MECHart.png-af493279e6c5063fc1c1532229d29f29.stex"
+path="res://.import/dualshot.png-e108bd5aabc74e0eca44b067140fb7e8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Player/MECHart.png"
-dest_files=[ "res://.import/MECHart.png-af493279e6c5063fc1c1532229d29f29.stex" ]
+source_file="res://Assets/Sprites/Projectiles/dualshot.png"
+dest_files=[ "res://.import/dualshot.png-e108bd5aabc74e0eca44b067140fb7e8.stex" ]
 
 [params]
 
