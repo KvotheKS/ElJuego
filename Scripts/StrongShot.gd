@@ -1,9 +1,9 @@
 extends "res://Scripts/WeaponBase.gd"
 
-var BULLET = preload("res://Scenes/Projectiles/DualShot.tscn")
+var BULLET = preload("res://Scenes/Projectiles/StrongShot.tscn")
 var fire
 func _ready():
-	firingSpeed = 5
+	firingSpeed = 2
 	
 	pass # Replace with function body.
 

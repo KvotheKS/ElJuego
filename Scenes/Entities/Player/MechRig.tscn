@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/MechRig.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Player/MECHart.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Weapons/DualShoter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/StrongShot.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -1770,6 +1771,10 @@ __meta__ = {
 
 [node name="DualShot" parent="Torso/Fshoulder/Farm/Fforearm/Gun" instance=ExtResource( 3 )]
 position = Vector2( 20.9824, -5.0733 )
+
+[node name="StrongShot" parent="Torso/Fshoulder/Farm/Fforearm/Gun" instance=ExtResource( 3 )]
+position = Vector2( 20.9824, -5.0733 )
+script = ExtResource( 4 )
 
 [node name="Bshoulder" type="AnimatedSprite" parent="Torso"]
 show_behind_parent = true
