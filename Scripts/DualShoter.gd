@@ -1,9 +1,13 @@
+# This Script controls the DualShoter weapon, it fires singular projectiles for the player. 
+
+
+
 extends "res://Scripts/WeaponBase.gd"
 
-var BULLET = preload("res://Scenes/Projectiles/StrongShotP.tscn")
+var BULLET = preload("res://Scenes/Projectiles/DualShotP.tscn")
 var fire
 func _ready():
-    firingSpeed = 2
+    firingSpeed = 5
     
     pass # Replace with function body.
 

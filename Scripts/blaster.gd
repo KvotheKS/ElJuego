@@ -1,3 +1,8 @@
+# This Script controls the Blaster weapon, it fires singular projectiles. 
+
+# -- TO DO --
+# check if it has the abbily to change how often it fires on creation.
+
 extends "res://Scripts/WeaponBase.gd"
 
 var BULLET = preload("res://Scenes/Projectiles/BulletMedium.tscn")

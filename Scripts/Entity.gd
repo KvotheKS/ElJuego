@@ -1,3 +1,6 @@
+# This script controls the base node for Entities, it should contain functions that apply for every entity in the game.
+# - Player and Enemy inherits from this.
+
 extends KinematicBody2D
 
 export(int) var level: float = 1

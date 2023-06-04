@@ -1,3 +1,14 @@
+# This controls the node for the enemy type Turret
+# - if any function shows up here and on other enemy type it should probably be in EnemyBase.
+
+# It is a static enemy that the player can plataform above without taking damage and fires at player position.
+
+# -- TO DO --
+# - restore ability to actually fire at the player
+# - add sprites and aim animation.
+
+
+
 extends "res://Scripts/EnemyBase.gd"
 
 const _bulletPath = preload("res://Scenes/Projectiles/BulletMedium.tscn")

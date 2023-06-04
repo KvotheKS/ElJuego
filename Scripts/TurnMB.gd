@@ -1,7 +1,12 @@
+# This script controsl the node Turn Movement behavior.
+# - it causes its parent to turn.
+
+# -- TO DO --
+# - Implement ability to turn toward either direction
+
+
 extends "res://Scripts/MovementBehaviorBase.gd"
 
-
-var direction
 var wave = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
