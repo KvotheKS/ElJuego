@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Entities/Enemies/Turret.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Sprites/Projectiles/bulletM.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Entities/Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/Enemies/Kamikaze/Kamikaze.tscn" type="PackedScene" id=6]
 
 [node name="Test" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,7 +19,7 @@ format = 1
 tile_data = PoolIntArray( 65535, 0, 0, 8, 0, 0, 131071, 0, 0, 65544, 0, 0, 196607, 0, 0, 131080, 0, 0, 262143, 0, 0, 196615, 0, 0, 196616, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 57, 1 )
+position = Vector2( 57, -1 )
 
 [node name="Turret" parent="." instance=ExtResource( 3 )]
 position = Vector2( 376, 222 )
@@ -26,3 +27,6 @@ position = Vector2( 376, 222 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 hframes = 5
+
+[node name="Kamikaze" parent="." instance=ExtResource( 6 )]
+position = Vector2( 625, 117 )
