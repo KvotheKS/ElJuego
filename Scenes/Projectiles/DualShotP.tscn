@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/MovementBehaviors/TowardMB.tscn" type="PackedScene" id=4]
 
 [node name="DualShotP" instance=ExtResource( 3 )]
+show_behind_parent = true
 collision_layer = 8
 collision_mask = 6
 script = ExtResource( 2 )

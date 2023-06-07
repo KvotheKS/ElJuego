@@ -12,7 +12,7 @@ func fire():
     if(!canFire):
         return
     self.set_canFire(false)
-    
+    muzzle_flash()
     
     var bullet = BULLET.instance()
     
@@ -24,5 +24,10 @@ func fire():
     
     
       
+      
 func muzzle_flash():
-    pass
+    var flash = $muzzleFlashE.duplicate()
+    add_child(flash)
+    flash.emitting = true
+    yield(get_tree().create_timer(1), "timeout")  
+    flash.queue_free()

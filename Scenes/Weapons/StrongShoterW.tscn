@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/StrongShot.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Projectiles/shortline.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.580645, 1 )
+colors = PoolColorArray( 0.171232, 0.767292, 0.769043, 1, 0, 0.961914, 1, 1, 0.258824, 0.867544, 1, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.218182 ), 0.0, 0.654978, 0, 0, Vector2( 0.191011, 1 ), 10.1136, 2.74387, 0, 0, Vector2( 1, 0.204545 ), -1.66442, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+flag_align_y = true
+flag_disable_z = true
+spread = 58.8
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 435.64
+initial_velocity_random = 0.52
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_curve = SubResource( 3 )
+color_ramp = SubResource( 5 )
+
+[node name="StrongShot" type="Node2D"]
+position = Vector2( 20.9824, -5.0733 )
+script = ExtResource( 1 )
+
+[node name="cooldown" type="Timer" parent="."]
+
+[node name="muzzleFlashE" type="Particles2D" parent="."]
+modulate = Color( 2, 2, 1.5, 1 )
+show_behind_parent = true
+emitting = false
+amount = 18
+lifetime = 0.15
+one_shot = true
+preprocess = 0.01
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

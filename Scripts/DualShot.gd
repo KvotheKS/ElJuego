@@ -11,7 +11,7 @@ var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
 
 func _ready():
     damage = 10
-    projectileSpeed = 500
+    projectileSpeed = 1000
     $TowardtMB.init(projectileSpeed)
     pass # Replace with function body.
 

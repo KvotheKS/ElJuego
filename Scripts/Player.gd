@@ -33,7 +33,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 #    print(jetpackHeat)
     isJumpInterrupted = Input.is_action_just_released("jump")
-    direction = Input.get_vector("move_left","move_right","ui_up","ui_down")
+    direction = Input.get_vector("move_left","move_right","ui_up","ui_down") # !! this will need fixing
 
     velocity = calculate_velocity(velocity, direction, delta)
     velocity = move_and_slide(velocity, Vector2.UP)
@@ -44,32 +44,83 @@ func _physics_process(delta: float) -> void:
                                                   delta)
                                                 
     animate(delta)  
+    effects(delta)
+    
 func _process(delta):
     if(Input.is_action_pressed("primary")):
-#        $DualShot.fire()    
-        $MechRig/Torso/Fshoulder/Farm/Fforearm/Gun/DualShot.fire()
+
+        $MechRig/Torso/Fshoulder/Farm/Fforearm/Gun/DualShoter.fire()
 
     # If the player can shoot the primary and the secondary at the same time
     # change elif -> if
     elif (Input.is_action_pressed("secondary")):	  
         $MechRig/Torso/Fshoulder/Farm/Fforearm/Gun/StrongShot.fire()
 
+func effects(delta):
+    if(direction.x != 0): 
+        $DashDustE.emitting = true
+        $MechRig/Torso/JetPackE.emitting = true  
+        
+    if(direction.x > 0): 
+        if($MechRig.scale.x == 1):
+            $MechRig/Torso/JetPackE.process_material.direction.x = -1
+        else:
+            $MechRig/Torso/JetPackE.process_material.direction.x = 0
+        $DashDustE.process_material.direction.x = -1
+        
+    elif(direction.x < 0): 
+        if($MechRig.scale.x == 1):
+            $MechRig/Torso/JetPackE.process_material.direction.x = 0
+        else:
+            $MechRig/Torso/JetPackE.process_material.direction.x = -1
+        $DashDustE.process_material.direction.x = 1
+       
+    else:
+        $DashDustE.emitting = false
+
+    if(!is_on_floor()):
+        $DashDustE.emitting = false;
+        
+    if (Input.is_action_pressed("jump") and hasJumped \
+        and jetpackHeat < _maxJetpackOverheat):
+        $MechRig/Torso/JetPackE.emitting = true  
+        
+    elif(is_on_floor() and direction.x == 0):
+        $MechRig/Torso/JetPackE.emitting = false  
+    
+    if(Input.is_action_pressed("jump")):
+        $MechRig/Torso/JetPackE.process_material.initial_velocity = 120
+        if($MechRig/Torso/JetPackE.amount != 20):
+            $MechRig/Torso/JetPackE.amount = 20
+    else:
+        $MechRig/Torso/JetPackE.process_material.initial_velocity = 60
+        if($MechRig/Torso/JetPackE.amount != 10):
+            $MechRig/Torso/JetPackE.amount = 10
+        
+        
 func animate(delta):
-    var curScale = $MechRig.scale.x
+
     var cursorPos = get_global_mouse_position()
     var playerPos = global_position
     
-    if(cursorPos < playerPos):
-        if curScale ==  1:
-            characterLean = 0.5
+    # flip rig based on mouse position
+    if(cursorPos.x < playerPos.x):
         $MechRig.scale.x = -1
+        if $MechRig.scale.x ==  1:
+            characterLean = 0.5
+        
     else:
-        if curScale ==  -1:
+        $MechRig.scale.x = 1
+        if $MechRig.scale.x ==  -1:
             characterLean = -0.5
-        $MechRig.scale.x = 1 
     
-    if(direction.x > 0): characterLean = min(characterLean+(5*delta),1)
-    elif(direction.x < 0): characterLean = max(characterLean-(5*delta),-1)
+    # moving       
+    if(direction.x > 0): 
+        characterLean = min(characterLean+(5*delta),1)
+    elif(direction.x < 0): 
+        characterLean = max(characterLean-(5*delta),-1)
+    
+    # not moving
     else:
         if(characterLean>0): characterLean = max(characterLean-(3*delta),0)
         else: characterLean = min(characterLean+(3*delta),0)
@@ -80,16 +131,23 @@ func animate(delta):
     aimVector = aimVector.rotated(deg2rad(-90))
     var aimAngle = rad2deg(atan2(aimVector.y, aimVector.x))
 
-        
-    if(curScale == 1):
+    var lookAngle 
+   
+    
+    if($MechRig.scale.x == 1):
+        lookAngle = clamp(aimAngle,-100,-80)
+        $MechRig/Torso/Head.rotation_degrees = lookAngle-$MechRig/Torso.rotation_degrees+90
         $MechRig/AnimationPlayer.play("aim")
         $MechRig/AnimationPlayer.seek((aimAngle+12-$MechRig/Torso.rotation_degrees)/-180,true)
-        
+
     else:
-      
+        lookAngle = clamp(aimAngle,80,100)
+        $MechRig/Torso/Head.rotation_degrees = -lookAngle-$MechRig/Torso.rotation_degrees+90
         $MechRig/AnimationPlayer.play("aim")
         $MechRig/AnimationPlayer.seek((aimAngle-12+$MechRig/Torso.rotation_degrees)/180,true)
-    
+      
+
+    # is on ground or not
     if(!is_on_floor()):
         $MechRig/AnimationPlayer.play("MoveUpward")
         $MechRig/AnimationPlayer.seek(velocity.y/_maxFallSpeed*2+0.5,true)
@@ -106,14 +164,12 @@ func animate(delta):
             
             $MechRig/AnimationPlayer.seek(characterLean,true)
             $MechRig/AnimationPlayer.stop()
-            
-    var lookAngle 
-    if(curScale == 1):
-        lookAngle = clamp(aimAngle,-100,-80)
-        $MechRig/Torso/Head.rotation_degrees = lookAngle-$MechRig/Torso.rotation_degrees+90
-    else:
-        lookAngle = clamp(aimAngle,80,100)
-        $MechRig/Torso/Head.rotation_degrees = -lookAngle-$MechRig/Torso.rotation_degrees+90
+    
+    
+    
+         
+   
+    
 
     
     
@@ -149,7 +205,7 @@ func calculate_velocity(linearVelocity: Vector2,
         outVelocity.y = max(outVelocity.y - _jetPackAcceleration, -_jetPackMaxSpeed)
         jetpackHeat = min(jetpackHeat + (_jetpackHeatRate * delta), _maxJetpackOverheat)
         jetpackCooldownTimer = 0.0
-
+    
     # Stop jumping
     if isJumpInterrupted:
         hasJumped = true
