@@ -1,4 +1,4 @@
-# This Script controls the DualShoter weapon, it fires singular projectiles for the player. 
+# This Script controls the DualShoter weapon, the player's primary weapon, it fires singular projectiles. 
 
 
 
@@ -12,7 +12,7 @@ func _ready():
     
 
 
-func fire():
+func fire(target = Vector2.ZERO):
     if(!canFire):
         return
     self.set_canFire(false)

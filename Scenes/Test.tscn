@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://Scenes/Entities/Enemies/Turret.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Entities/Enemies/SGuardian.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Entities/Player/Player.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Environment" id=1]
@@ -25,8 +25,8 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 65535, 0, 0, 8, 0, 0, 131071, 0, 0, 65544, 0, 0, 196607, 0, 0, 131080, 0, 0, 262143, 0, 0, 196615, 0, 0, 196616, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0 )
 
-[node name="Turret" parent="." instance=ExtResource( 3 )]
-position = Vector2( 376, 222 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="SGuardian" parent="." instance=ExtResource( 3 )]
+position = Vector2( 108, 55 )

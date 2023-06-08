@@ -1,3 +1,5 @@
+# This Script controls the StrongShoter weapon, the player's secondary weapon, it fires strong singular piercing projectiles, limited by cooldown. 
+
 extends "res://Scripts/WeaponBase.gd"
 
 var BULLET = preload("res://Scenes/Projectiles/StrongShotP.tscn")
@@ -8,7 +10,8 @@ func _ready():
     pass # Replace with function body.
 
 
-func fire():
+func fire(target = Vector2.ZERO):
+    
     if(!canFire):
         return
     self.set_canFire(false)

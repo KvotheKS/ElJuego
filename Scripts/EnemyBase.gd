@@ -5,5 +5,3 @@
 extends "res://Scripts/Entity.gd"
 
 
-func _ready():
-    pass 

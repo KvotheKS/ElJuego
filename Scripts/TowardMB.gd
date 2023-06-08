@@ -8,17 +8,10 @@ func _ready():
     
     
 func init(_speed):
-    
     speed = _speed
     
 func _physics_process(delta):
-
-    
-    if(get_parent() is Area2D):
-        get_parent().global_position += direction * speed * delta
-        
-    else:
-        get_parent().velocity += speed*direction
+    get_parent().velocity = speed*direction
 
 
 

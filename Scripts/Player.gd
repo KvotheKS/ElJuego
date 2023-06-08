@@ -67,6 +67,7 @@ func effects(delta):
         else:
             $MechRig/Torso/JetPackE.process_material.direction.x = 0
         $DashDustE.process_material.direction.x = -1
+        $DashDustE.process_material.angle = 25
         
     elif(direction.x < 0): 
         if($MechRig.scale.x == 1):
@@ -74,6 +75,7 @@ func effects(delta):
         else:
             $MechRig/Torso/JetPackE.process_material.direction.x = -1
         $DashDustE.process_material.direction.x = 1
+        $DashDustE.process_material.angle = -25
        
     else:
         $DashDustE.emitting = false

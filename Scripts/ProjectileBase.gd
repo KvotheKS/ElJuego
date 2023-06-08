@@ -14,7 +14,7 @@ var damage = baseDamage
 # base projectile speed of all projectiles
 export var baseProjectileSpeed = 200
 var projectileSpeed = baseProjectileSpeed
-
+export var mass = 50
 # base duration of all player projectiles
 export(float) var duration: float = 1
 
@@ -25,16 +25,22 @@ var pierce = base_pierce
 # multiplicative modifier to duration
 export(float) var durationMultiplier: float = 0
 
+var velocity = Vector2.ZERO setget set_velocity
+var max_global_speed = 5000
+var max_speed = 80
+
 #var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
 
 func _ready():
-    $Duration.wait_time = duration
+    $Duration.start(duration)
     
 func _process(delta):
     rotation = direction.angle()
     if not $VisibilityNotifier2D.is_on_screen():
         queue_free()
     
+func _physics_process(delta):
+    move(delta)
 ##################
 # Base Functions #
 ##################
@@ -44,6 +50,9 @@ func UpdateStats():
 #
 #    $CollisionShape2D.scale = Vector2(l_scale,l_scale)
 
+func move(delta):
+    global_position += velocity*delta
+    
 func die():
     death()
     queue_free()
@@ -69,10 +78,17 @@ func _on_Duration_timeout():
     die()
     
 
-func _on_ProjectileBase_body_entered(body):
+func _on_ProjectileBase_body_entered(body): #for hiting terrain
     die()
+
     
-func _on_ProjectileBase_area_entered(area):
-    if(area.get_collision_layer() == 1):
-        hanlde_hit()
-        area.get_parent().handle_damage(damage)
+func _on_ProjectileBase_area_entered(area): #for hitting entities
+    hanlde_hit()
+    
+    var hit_direction = ((area.global_position - self.global_position).normalized() + self.velocity.normalized()).normalized()
+    area.get_parent().handle_hit(damage, hit_direction, mass)
+   
+    
+func set_velocity(value):
+    velocity = value
+    velocity = velocity.clamped(max_global_speed)

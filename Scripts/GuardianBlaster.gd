@@ -1,11 +1,9 @@
-# This Script controls the Blaster weapon, it fires singular projectiles. 
 
-# -- TO DO --
-# check if it has the abbily to change how often it fires on creation.
 
 extends "res://Scripts/WeaponBase.gd"
 
 var BULLET = preload("res://Scenes/Projectiles/BulletMedium.tscn")
+
 
 func _ready():
     firingSpeed = 1
@@ -16,12 +14,10 @@ func _ready():
 
 
 func _process(delta):
-    if(Input.is_action_pressed("jump")):
-        fire()
     pass
    
 
-func fire():
+func fire(target = Vector2.ZERO):
 
     if(!canFire):
         return
@@ -32,9 +28,9 @@ func fire():
         var bullet = BULLET.instance()
        
         bullet.projectileSpeed = 100 + rand_range(-speedVariation, speedVariation)     
-        
+        bullet.duration = 1 + rand_range(-0.5,0.5)
    
-        var aimDirection = ( get_global_mouse_position() - global_position ).normalized()
+        var aimDirection = ( target - global_position ).normalized()
         bullet.direction = aimDirection.rotated(deg2rad(rand_range(-spreadAngle,spreadAngle)))      
           
         get_tree().root.get_child(0).add_child(bullet)

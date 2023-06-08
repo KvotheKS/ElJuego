@@ -15,7 +15,7 @@ var canFire = false setget set_canFire
 var projectiles = 1
 var spreadAngle = 0
 var precision = 100
-
+var speedVariation = 0
 
 func _ready():
     
@@ -27,7 +27,7 @@ func _process(delta):
     pass
   
 # this function must be defined on inheriting node
-func fire():
+func fire(target):
     assert(false, "define this fucntion on inheriting node")
    
 func muzzle_flash():
@@ -47,6 +47,6 @@ func set_canFire(val):
         $cooldown.start()
 
 func _on_cooldown_timeout():
-    canFire = true
+    set_canFire(true)
     
 

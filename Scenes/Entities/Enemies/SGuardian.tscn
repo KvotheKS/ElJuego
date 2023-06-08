@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Entities/Enemies/EnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/Sguardian.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/SGuardian.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Weapons/GuardianBlasterW.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 17.5 )
+
+[node name="SGuardian" instance=ExtResource( 1 )]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="HealthBar" parent="." index="0"]
+margin_top = -32.0
+margin_bottom = -27.0
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="StateTimer" type="Timer" parent="." index="3"]
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+position = Vector2( 0, 1.5 )
+shape = SubResource( 1 )
+
+[node name="GuardianBlaster" parent="." index="5" instance=ExtResource( 4 )]
+position = Vector2( 0, -10 )
+
+[connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

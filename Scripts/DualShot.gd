@@ -15,9 +15,7 @@ func _ready():
     $TowardtMB.init(projectileSpeed)
     pass # Replace with function body.
 
-func _physics_process(delta):
-#    print(direction)
-    pass
+
     
 func death():
     if(deathEffect):
