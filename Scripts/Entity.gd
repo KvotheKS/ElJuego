@@ -44,30 +44,30 @@ var velocity = Vector2.ZERO
 
 
 func _ready():
-    pass # Replace with function body.
+	pass # Replace with function body.
 
 #func move():
 #	velocity = move(velocity)
 
 func move():
-    move_and_slide(velocity)
+	move_and_slide(velocity)
 
 func _integrate_forces(state):
-    move()
-    
+	move()
+	
 func _process(delta):
-    $HealthBar.value = health
-    
+	$HealthBar.value = health
+	
 func _physics_process(delta):
    pass
-    
-    
+	
+	
 func die():
-    queue_free()
-    
+	queue_free()
+	
 func handle_damage(value):
-    health -= value 
-    health = clamp(health,0,maxHealth)
-    if(health == 0):
-        die()
-    
+	health -= value 
+	health = clamp(health,0,maxHealth)
+	if(health == 0):
+		die()
+	
