@@ -55,5 +55,5 @@ func _process(delta):
 	#position = initial_relative + (log(min(MAXDIST, diff_vec.length())) / log(1.2)) * diff_vec.normalized()
 	var vec_dist = mf_curve(min(MAXDIST, diff_vec.length()))
 	position = initial_relative + vec_dist * diff_vec.normalized()
-	zoom = initial_zoom * (1 + (vec_dist/MAXINFLUENCE) * ZOOMCHANGE)
+	#zoom = initial_zoom * (1 + (vec_dist/MAXINFLUENCE) * ZOOMCHANGE)
 	return
