@@ -29,4 +29,4 @@ tile_data = PoolIntArray( 65535, 0, 0, 8, 0, 0, 131071, 0, 0, 65544, 0, 0, 19660
 environment = SubResource( 1 )
 
 [node name="SGuardian" parent="." instance=ExtResource( 3 )]
-position = Vector2( 108, 55 )
+position = Vector2( 399, 114 )

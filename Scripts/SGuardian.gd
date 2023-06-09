@@ -26,7 +26,7 @@ func _process(delta):
         MOVING:
             process_moving(delta)  
         CHARGING:
-            process_charging()      
+            process_charging(delta)      
         ATTACKING:
             process_attacking()
     
@@ -54,19 +54,19 @@ func process_moving(delta):
     
     if(velocity.length()<80):
         
-        if(player_pos.distance_to(self.position)>100): 
-            set_velocity(velocity + (player_pos - self.position ).normalized()*100*delta)
-            
-        elif(player_pos.distance_to(self.position)<80): 
-            set_velocity(velocity + (self.position - player_pos ).normalized()*100*delta)
-            
+        var distance = player_pos.distance_to(self.position)
+        var direction = (player_pos - self.position).normalized() if distance > 100 else (self.position - player_pos).normalized()
+        set_velocity(velocity + direction * 100 * delta)
+
     else:   
-        velocity = velocity - velocity.normalized()*200*delta
-        
-    if(player_pos.y-20< position.y):
+        set_velocity(velocity - velocity.normalized()*200*delta)
+    
+    #avoid being under the player
+    if(player_pos.y-20 < position.y):
          set_velocity(velocity + Vector2.UP*100*delta)
         
-func process_charging():  
+func process_charging(delta):  
+    set_velocity(velocity - velocity.normalized()*60*delta)
     pass
     
 func process_attacking():

@@ -26,12 +26,12 @@ func fire(target = Vector2.ZERO):
     
     for i in range(projectiles):
         var bullet = BULLET.instance()
-       
-        bullet.projectileSpeed = 100 + rand_range(-speedVariation, speedVariation)     
-        bullet.duration = 1 + rand_range(-0.5,0.5)
+        var spread = rand_range(-spreadAngle,spreadAngle)
+        bullet.projectileSpeed = 200 + rand_range(-speedVariation, speedVariation)  - abs(spread)*10
+        bullet.duration = 1 + rand_range(-0.5,0.5) 
    
         var aimDirection = ( target - global_position ).normalized()
-        bullet.direction = aimDirection.rotated(deg2rad(rand_range(-spreadAngle,spreadAngle)))      
+        bullet.direction = aimDirection.rotated(deg2rad(spread))      
           
         get_tree().root.get_child(0).add_child(bullet)
         bullet.position = global_position

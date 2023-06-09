@@ -83,7 +83,7 @@ func _on_ProjectileBase_body_entered(body): #for hiting terrain
 
     
 func _on_ProjectileBase_area_entered(area): #for hitting entities
-    hanlde_hit()
+    self.hanlde_hit()
     
     var hit_direction = ((area.global_position - self.global_position).normalized() + self.velocity.normalized()).normalized()
     area.get_parent().handle_hit(damage, hit_direction, mass)

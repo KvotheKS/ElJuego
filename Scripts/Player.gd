@@ -167,13 +167,7 @@ func animate(delta):
             $MechRig/AnimationPlayer.seek(characterLean,true)
             $MechRig/AnimationPlayer.stop()
     
-    
-    
-         
-   
-    
-
-    
+  
     
 func calculate_velocity(linearVelocity: Vector2, 
                         direction: Vector2,
@@ -238,4 +232,6 @@ func calculate_jetpack_overheat(overheat: float,
 
 
 
-
+func handle_hit(hit_damage, hit_direction = Vector2.ZERO, hit_mass=0):
+    .handle_hit(hit_damage, hit_direction, hit_mass)
+    $AnimationPlayer.play("Invulnerability")

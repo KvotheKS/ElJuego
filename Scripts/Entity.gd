@@ -49,6 +49,7 @@ var velocity = Vector2.ZERO setget set_velocity
 var max_global_speed = 500
 var max_speed = 80
 
+export (bool) var invulnerable = false
 
 func _ready():
     pass # Replace with function body.
@@ -69,15 +70,17 @@ func _physics_process(delta):
     
 func die():
     queue_free()
+
+
+func handle_hit(hit_damage, hit_direction = Vector2.ZERO, hit_mass=0):
     
-func handle_hit(hit_damage, hit_direction, hit_mass=100):
+    if(invulnerable): return
     
-    velocity += hit_direction*100*hit_mass/mass
+    velocity += hit_direction*100*hit_mass/mass        # calculate knockback
     health -= hit_damage 
     health = clamp(health,0,maxHealth)
     if(health == 0):
         die()
     
 func set_velocity(value):
-    velocity = value
-    velocity = velocity.clamped(max_global_speed)
+    velocity = value.clamped(max_global_speed)

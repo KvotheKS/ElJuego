@@ -1,3 +1,4 @@
+#this script controlsthe trail created by strongshot(player secondary fire)
 extends Line2D
 
 
