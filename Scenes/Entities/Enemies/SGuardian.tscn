@@ -9,8 +9,7 @@
 extents = Vector2( 10, 17.5 )
 
 [node name="SGuardian" instance=ExtResource( 1 )]
-collision_layer = 0
-collision_mask = 2
+collision_mask = 6
 script = ExtResource( 3 )
 
 [node name="HealthBar" parent="." index="0"]

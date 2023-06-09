@@ -4,7 +4,7 @@
 
 extends "res://Scripts/ProjectileBase.gd"
 
-var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
+var deathEffect = preload("res://Scenes/Effects/SpriteBased/BulletBlastE.tscn")
 
 func _ready():
     $TowardtMB.init(projectileSpeed)

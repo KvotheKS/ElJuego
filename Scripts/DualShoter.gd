@@ -5,7 +5,7 @@
 extends "res://Scripts/WeaponBase.gd"
 
 var BULLET = preload("res://Scenes/Projectiles/DualShotP.tscn")
-var FLASH = preload("res://Scenes/Effects/muzzleFlashE.tscn")
+var FLASH = preload("res://Scenes/Effects/ParticleBased/muzzleFlashE.tscn")
 
 func _ready():
     firingSpeed = 5

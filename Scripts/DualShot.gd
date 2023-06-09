@@ -7,9 +7,10 @@
 extends "res://Scripts/ProjectileBase.gd"
 
 
-var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
+var deathEffect = preload("res://Scenes/Effects/SpriteBased/BulletBlastE.tscn")
 
 func _ready():
+    pierce = 1
     damage = 10
     projectileSpeed = 1000
     $TowardtMB.init(projectileSpeed)
@@ -21,4 +22,4 @@ func death():
     if(deathEffect):
         var deinstance = deathEffect.instance()
         deinstance.position = position
-        get_parent().add_child(deinstance)
+        get_tree().root.get_child(0).add_child(deinstance)

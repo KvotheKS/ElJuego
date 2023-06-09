@@ -5,7 +5,7 @@ extends KinematicBody2D
 
 export(int) var level: float = 1
 # current maximum health value
-export(float) var maxHealth: float = 10000
+export(float) var maxHealth: float = 100
 
 # current health value
 export(float) var health: float = maxHealth
@@ -33,18 +33,8 @@ export(float) var areaMltiplier: float = 0
 # multiplicative modifier to projectile speed
 export(float) var projectileSpeedMultiplier:  float = 0
 
-# bonus projectile pierce
-export(int) var pierce: int = 0
 
-# bonus amount
-export(float) var projectileCountBonus: float = 0
-
-# multiplicative modifier to duration
-export(float) var durationMultiplier: float = 0
-
-# multiplicative modifier to cooldown
-export(float) var cooldownMultiplier: float = 0
-
+var EXPLOSION = preload("res://Scenes/Effects/DeathExplosion.tscn")
 var velocity = Vector2.ZERO setget set_velocity
 var max_global_speed = 500
 var max_speed = 80
@@ -69,7 +59,12 @@ func _physics_process(delta):
     
     
 func die():
+    var explosion = EXPLOSION.instance()  
+    explosion.position = position
+    get_tree().root.get_child(0).add_child(explosion)
+    
     queue_free()
+    
 
 
 func handle_hit(hit_damage, hit_direction = Vector2.ZERO, hit_mass=0):

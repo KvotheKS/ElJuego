@@ -7,6 +7,7 @@ var stage
 var player_pos = Vector2.ZERO
 
 func _ready():
+    maxHealth = 50
     stage = get_tree().get_root().get_node("Test")
     change_state(MOVING)
     

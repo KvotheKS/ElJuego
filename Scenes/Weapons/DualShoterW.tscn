@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/DualShoter.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Weapons/WeaponBase.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Effects/muzzleFlashE.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Effects/ParticleBased/muzzleFlashE.tscn" type="PackedScene" id=3]
 
 [node name="DualShoter" instance=ExtResource( 2 )]
 script = ExtResource( 1 )

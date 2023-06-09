@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Entity.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Entities/Player/MechRig.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Effects/DashDustE.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Effects/ParticleBased/DashDustE.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ShaderMaterial" id=3]
 

@@ -21,7 +21,7 @@ func _process(delta):
     pass
    
 
-func fire():
+func fire(target):
 
     if(!canFire):
         return

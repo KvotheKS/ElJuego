@@ -30,6 +30,7 @@ var max_global_speed = 5000
 var max_speed = 80
 
 #var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
+var canHit = true
 
 func _ready():
     $Duration.start(duration)
@@ -41,6 +42,8 @@ func _process(delta):
     
 func _physics_process(delta):
     move(delta)
+    canHit=true
+    
 ##################
 # Base Functions #
 ##################
@@ -53,15 +56,7 @@ func UpdateStats():
 func move(delta):
     global_position += velocity*delta
     
-func die():
-    death()
-    queue_free()
-    
-func hanlde_hit():
-    if(pierce > 0):
-        pierce -= 1
-    else:
-        die()
+
     
 #####################
 # Derived Functions #
@@ -81,12 +76,29 @@ func _on_Duration_timeout():
 func _on_ProjectileBase_body_entered(body): #for hiting terrain
     die()
 
+
+func die():
+    death()
+    queue_free()
     
+func hanlde_hit():
+    if(pierce > 0):
+        pierce -= 1
+    else:
+        die()
+        
 func _on_ProjectileBase_area_entered(area): #for hitting entities
-    self.hanlde_hit()
     
+    if(!canHit):
+        return
+    canHit = false
+    
+    hanlde_hit()
     var hit_direction = ((area.global_position - self.global_position).normalized() + self.velocity.normalized()).normalized()
     area.get_parent().handle_hit(damage, hit_direction, mass)
+
+
+    
    
     
 func set_velocity(value):

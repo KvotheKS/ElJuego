@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Entities/Enemies/SGuardian.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Effects/DeathExplosion.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Entities/Player/Player.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Environment" id=1]
@@ -30,3 +31,7 @@ environment = SubResource( 1 )
 
 [node name="SGuardian" parent="." instance=ExtResource( 3 )]
 position = Vector2( 399, 114 )
+
+[node name="DeathExplosion" parent="." instance=ExtResource( 4 )]
+emitting = false
+one_shot = true
