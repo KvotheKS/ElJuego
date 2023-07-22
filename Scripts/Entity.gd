@@ -4,6 +4,10 @@
 extends KinematicBody2D
 
 export(int) var level: float = 1
+
+# How many points are awarded on death
+export(int) var pointsOnDeath: int = 10
+
 # current maximum health value
 export(float) var maxHealth: float = 100
 
@@ -62,6 +66,9 @@ func die():
 	var explosion = EXPLOSION.instance()  
 	explosion.position = position
 	get_tree().root.get_child(0).add_child(explosion)
+	
+	# Add points to the total
+	GameState.points += pointsOnDeath
 	
 	queue_free()
 	

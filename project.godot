@@ -13,6 +13,10 @@ config_version=4
 config/name="Shoot'em"
 run/main_scene="res://Scenes/Test.tscn"
 
+[autoload]
+
+GameState="*res://Scripts/GameState.gd"
+
 [display]
 
 window/size/width=640

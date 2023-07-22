@@ -17,6 +17,9 @@ func _ready() -> void:
 # Sends player position to the turret
 func _process(_delta):
 #    $Turret._playerPosition = get_player_position()
+
+	# Update score label
+	$Score.text = str(GameState.points)
 	pass
   
 func get_player_position():
