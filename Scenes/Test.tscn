@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Effects/DeathExplosion.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Entities/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Entities/Enemies/SingleShooter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Sprites/World/background.png" type="Texture" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -43,3 +44,10 @@ margin_left = 17.0
 margin_top = 14.0
 margin_right = 62.0
 margin_bottom = 28.0
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 6.10352e-05, 3.05176e-05 )
+scale = Vector2( 0.314815, 0.314815 )
+z_index = -1
+texture = ExtResource( 7 )
+centered = false
