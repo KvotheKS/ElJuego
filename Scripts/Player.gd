@@ -3,6 +3,7 @@
 
 extends "res://Scripts/Entity.gd"
 
+var jetpackAudio = preload("res://Assets/Sounds/Feedback1.wav")
 
 const _gravity = 2000.0
 const _maxSpeed = Vector2(400.0, 500.0)
@@ -12,13 +13,13 @@ const _deceleration = Vector2(0.15, 0.0) # Range between [0.0, 1.0]
 
 const _jetPackMaxSpeed = 300
 const _jetPackAcceleration = 100
-const _jetpackCooldownDelay = 0
+const _jetpackCooldownDelay = 0.7
 const _jetpackCooldownRate = 20.0
 const _jetpackHeatRate = 50.0
 const _maxJetpackOverheat = 100.0
 
 var jetpackHeat = 0.0
-var jetpackCooldownTimer = 0
+var jetpackCooldownTimer = 5.0
 
 var isJumpInterrupted = false # Jump with variable height
 var hasJumped = true 
@@ -29,6 +30,8 @@ var direction = Vector2.ZERO
 func _ready():
 	maxHealth = 100
 	health = maxHealth
+	hitAudio = preload("res://Assets/Sounds/Hit5.wav")
+
 # Called every frame
 func _physics_process(delta: float) -> void:
 #    print(jetpackHeat)
@@ -42,18 +45,17 @@ func _physics_process(delta: float) -> void:
 												  _jetpackCooldownDelay,
 												  _jetpackCooldownRate,
 												  delta)
-												
+
 	animate(delta)  
 	effects(delta)
-	
+
 func _process(delta):
 	if(Input.is_action_pressed("primary")):
-
 		$MechRig/Torso/Fshoulder/Farm/Fforearm/Gun/DualShoter.fire()
 
 	# If the player can shoot the primary and the secondary at the same time
 	# change elif -> if
-	elif (Input.is_action_pressed("secondary")):	  
+	if (Input.is_action_pressed("secondary")):	  
 		$MechRig/Torso/Fshoulder/Farm/Fforearm/Gun/StrongShot.fire()
 
 func effects(delta):
@@ -80,16 +82,25 @@ func effects(delta):
 	else:
 		$DashDustE.emitting = false
 
-	if(!is_on_floor()):
-		$DashDustE.emitting = false;
-		
+	#if(!is_on_floor()):
+	#	$DashDustE.emitting = false;
+	#	$WalkingAudio.stop()
+
 	if (Input.is_action_pressed("jump") and hasJumped \
 		and jetpackHeat < _maxJetpackOverheat):
 		$MechRig/Torso/JetPackE.emitting = true  
 		
 	elif(is_on_floor() and direction.x == 0):
-		$MechRig/Torso/JetPackE.emitting = false  
-	
+		$MechRig/Torso/JetPackE.emitting = false
+
+	#elif (is_on_floor() and abs(velocity.x) >= 30):
+	#	if !$WalkingAudio.is_playing():
+	#		$WalkingAudio.stream = runningAudio
+	#		$WalkingAudio.play()
+
+	#if (is_on_floor() and abs(velocity.x) < 30):
+	#	$WalkingAudio.stop()
+
 	if(Input.is_action_pressed("jump")):
 		$MechRig/Torso/JetPackE.process_material.initial_velocity = 120
 		if($MechRig/Torso/JetPackE.amount != 20):
@@ -227,10 +238,13 @@ func calculate_jetpack_overheat(overheat: float,
 
 	# Cooldown jetpack until 0 or until next use
 	outHeat = max(outHeat - (cooldownRate * delta), 0.0)
+	
+	if (outHeat == 0 and overheat != 0):
+		if !$JetpackAudio.is_playing():
+			$JetpackAudio.stream = jetpackAudio
+			$JetpackAudio.play()
 
 	return outHeat
-
-
 
 func handle_hit(hit_damage, hit_direction = Vector2.ZERO, hit_mass=0):
 	.handle_hit(hit_damage, hit_direction, hit_mass)

@@ -9,6 +9,7 @@ func _ready():
 	maxHealth = 20
 	pointsOnDeath = 100
 	stage = get_tree().get_root().get_node("Test")
+	hitAudio = preload("res://Assets/Sounds/Hit2.wav")
 	change_state(MOVING)
 
 	max_speed = 160

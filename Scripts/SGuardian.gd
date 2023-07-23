@@ -1,6 +1,5 @@
 extends "res://Scripts/EnemyBase.gd"
 
-
 enum {MOVING, ATTACKING,CHARGING,IDLE}
 var currentState = IDLE
 var stage 
@@ -10,6 +9,7 @@ func _ready():
 	maxHealth = 50
 	pointsOnDeath = 300
 	stage = get_tree().get_root().get_node("Test")
+	hitAudio = preload("res://Assets/Sounds/Hit1.wav")
 	change_state(MOVING)
 	
 	max_speed = 80
@@ -31,8 +31,6 @@ func _process(delta):
 			process_charging(delta)      
 		ATTACKING:
 			process_attacking()
-	
-		
 
 func change_state(newState):
 	currentState = newState

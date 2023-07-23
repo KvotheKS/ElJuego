@@ -50,4 +50,6 @@ explosiveness = 1.0
 process_material = SubResource( 1 )
 texture = ExtResource( 2 )
 
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

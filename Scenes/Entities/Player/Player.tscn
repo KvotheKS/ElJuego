@@ -101,4 +101,6 @@ emitting = false
 anims/Invulnerability = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
+[node name="JetpackAudio" type="AudioStreamPlayer2D" parent="." index="7"]
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

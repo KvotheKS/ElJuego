@@ -13,3 +13,5 @@ margin_right = 17.0
 margin_bottom = -23.0
 theme = ExtResource( 2 )
 percent_visible = false
+
+[node name="HitAudio" type="AudioStreamPlayer2D" parent="."]

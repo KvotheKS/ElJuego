@@ -37,6 +37,8 @@ export(float) var areaMltiplier: float = 0
 # multiplicative modifier to projectile speed
 export(float) var projectileSpeedMultiplier:  float = 0
 
+# Audio that plays when hit
+var hitAudio = preload("res://Assets/Sounds/Hit3.wav")
 
 var EXPLOSION = preload("res://Scenes/Effects/DeathExplosion.tscn")
 var velocity = Vector2.ZERO setget set_velocity
@@ -71,12 +73,15 @@ func die():
 	GameState.points += pointsOnDeath
 	
 	queue_free()
-	
 
 
 func handle_hit(hit_damage, hit_direction = Vector2.ZERO, hit_mass=0):
 	
 	if(invulnerable): return
+	
+	if !$HitAudio.is_playing():
+		$HitAudio.stream = hitAudio
+		$HitAudio.play()
 	
 	velocity += hit_direction*100*hit_mass/mass        # calculate knockback
 	health -= hit_damage 
