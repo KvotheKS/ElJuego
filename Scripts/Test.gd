@@ -7,6 +7,7 @@ extends Node2D
 
 var GUARDIAN = preload("res://Scenes/Entities/Enemies/SGuardian.tscn")
 var SINGLE_SHOOTER = preload("res://Scenes/Entities/Enemies/SingleShooter.tscn")
+var TURRET = preload("res://Scenes/Entities/Enemies/Turret.tscn")
 
 const MIN_X = 30
 const MIN_Y = 30
@@ -37,9 +38,7 @@ func timeout():
 	print("TIMEOUT")
 	return
 
-# Sends player position to the turret
 func _process(_delta):
-#    $Turret._playerPosition = get_player_position()
 
 	# Update score label
 	$Score.text = str(GameState.points)
@@ -58,7 +57,7 @@ func _on_SpawnTimer_timeout():
 	var spawnPoint = spawnPoints[randi() % 4]
 
 	# Choose a random enemy to spawn
-	var enemy = enemies[randi() % 2].instance()
+	var enemy = enemies[randi() % enemies.size()].instance()
 	enemy.position = spawnPoint
 
 	add_child(enemy)

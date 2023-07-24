@@ -8,25 +8,38 @@
 # - add sprites and aim animation.
 
 
-
 extends "res://Scripts/EnemyBase.gd"
 
 const _bulletPath = preload("res://Scenes/Projectiles/BulletMedium.tscn")
 
-var _playerPosition = null # Current player position (updated at Test.gd)
 var _shotsPerSecond = 5
-var _cooldownTimer = 0.0
+var _cooldownTimer = 1.0
+var stage
+
+func _ready():
+	maxHealth = 25
+	pointsOnDeath = 100
+	stage = get_tree().get_root().get_node("Test")
+	hitAudio = preload("res://Assets/Sounds/Hit3.wav")
+
+	pass
 
 func _process(delta):
 
 	# Turret always looks at the player
-	
-	$Node2D.look_at(_playerPosition)
+	var playerPosition = stage.get_player_position()
+
+	if (playerPosition == null):
+		return
+
+	$Node2D.look_at(playerPosition)
 
 	_cooldownTimer += delta
 	if _cooldownTimer >= 1.0 / _shotsPerSecond:
 		_cooldownTimer = 0
-		shoot(_playerPosition)
+
+	else:
+		shoot(playerPosition)
 
 func shoot(target: Vector2):
 
