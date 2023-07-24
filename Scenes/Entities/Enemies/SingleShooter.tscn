@@ -6,9 +6,10 @@
 [ext_resource path="res://Scenes/Weapons/SingleShooterBlaster.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15, 17 )
+extents = Vector2( 10, 13.5 )
 
 [node name="SingleShooter" instance=ExtResource( 1 )]
+collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
@@ -20,6 +21,7 @@ texture = ExtResource( 3 )
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
 [node name="SingleShooterBlaster" parent="." index="5" instance=ExtResource( 4 )]

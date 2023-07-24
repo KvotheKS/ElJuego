@@ -82,9 +82,9 @@ func effects(delta):
     else:
         $DashDustE.emitting = false
 
-    #if(!is_on_floor()):
-    #	$DashDustE.emitting = false;
-    #	$WalkingAudio.stop()
+    if(!is_on_floor()):
+        $DashDustE.emitting = false;
+#    	$WalkingAudio.stop()
 
     if (Input.is_action_pressed("jump") and hasJumped \
         and jetpackHeat < _maxJetpackOverheat):
