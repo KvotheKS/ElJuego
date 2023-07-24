@@ -63,3 +63,8 @@ func _on_SpawnTimer_timeout():
 
 	add_child(enemy)
 	return
+
+func _unhandled_input(event):
+	if event.is_action_pressed("menu"):
+		get_tree().change_scene("res://Scenes/Menu.tscn")
+		GameState.points = 0
