@@ -25,12 +25,12 @@ func _ready() -> void:
 	# Set possible spawn points
 	var top = Vector2(rand_range(MIN_X, MAX_X), MIN_Y)
 	var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
-	var left = Vector2(0, rand_range(MIN_Y, MAX_Y))
+	var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
 	var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
 	spawnPoints = [top, bottom, left, right]
 
 	# Set possible enemies
-	enemies = [GUARDIAN, SINGLE_SHOOTER]
+	enemies = [GUARDIAN, SINGLE_SHOOTER, TURRET]
 
 	pass
 

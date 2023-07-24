@@ -13,12 +13,12 @@ extends "res://Scripts/EnemyBase.gd"
 const _bulletPath = preload("res://Scenes/Projectiles/BulletMedium.tscn")
 
 var _shotsPerSecond = 5
-var _cooldownTimer = 1.0
+var _cooldownTimer = 0.0
 var stage
 
 func _ready():
-	maxHealth = 25
-	pointsOnDeath = 100
+	maxHealth = 35
+	pointsOnDeath = 200
 	stage = get_tree().get_root().get_node("Test")
 	hitAudio = preload("res://Assets/Sounds/Hit3.wav")
 
@@ -32,23 +32,9 @@ func _process(delta):
 	if (playerPosition == null):
 		return
 
-	$Node2D.look_at(playerPosition)
-
 	_cooldownTimer += delta
 	if _cooldownTimer >= 1.0 / _shotsPerSecond:
 		_cooldownTimer = 0
 
 	else:
-		shoot(playerPosition)
-
-func shoot(target: Vector2):
-
-	# Create a bullet
-	var bullet = _bulletPath.instance()
-	get_parent().add_child(bullet)
-
-	# Shoot the target
-	bullet.position = $Node2D/Position2D.global_position
-	var angle = (target - bullet.position).angle_to(bullet.position)
- 
-	return
+		$SingleShooterBlaster.fire(playerPosition)
