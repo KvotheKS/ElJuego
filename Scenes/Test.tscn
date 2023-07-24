@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Entities/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Entities/Enemies/SingleShooter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Sprites/World/background.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -39,19 +40,6 @@ maxHealth = 0.0
 
 [node name="SingleShooter" parent="." instance=ExtResource( 6 )]
 position = Vector2( 264, 251 )
-level = null
-pointsOnDeath = null
-maxHealth = null
-health = null
-regeneraion = null
-moveSpeed = null
-mass = null
-moveSpeedMultiplier = null
-shield = null
-damageMultiplier = null
-areaMltiplier = null
-projectileSpeedMultiplier = null
-invulnerable = null
 
 [node name="Score" type="Label" parent="."]
 margin_left = 17.0
@@ -69,5 +57,7 @@ centered = false
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="Spawner" parent="." instance=ExtResource( 8 )]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

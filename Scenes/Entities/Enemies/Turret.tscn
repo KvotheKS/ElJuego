@@ -13,19 +13,6 @@ radius = 18.0
 
 [node name="Turret" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-level = null
-pointsOnDeath = null
-maxHealth = null
-health = null
-regeneraion = null
-moveSpeed = null
-mass = null
-moveSpeedMultiplier = null
-shield = null
-damageMultiplier = null
-areaMltiplier = null
-projectileSpeedMultiplier = null
-invulnerable = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 scale = Vector2( 0.177419, 0.177419 )
