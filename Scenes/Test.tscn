@@ -33,11 +33,25 @@ environment = SubResource( 1 )
 
 [node name="SGuardian" parent="." instance=ExtResource( 3 )]
 position = Vector2( 399, 114 )
+maxHealth = 0.0
 
 [node name="DeathExplosion" parent="." instance=ExtResource( 4 )]
 
 [node name="SingleShooter" parent="." instance=ExtResource( 6 )]
 position = Vector2( 264, 251 )
+level = null
+pointsOnDeath = null
+maxHealth = null
+health = null
+regeneraion = null
+moveSpeed = null
+mass = null
+moveSpeedMultiplier = null
+shield = null
+damageMultiplier = null
+areaMltiplier = null
+projectileSpeedMultiplier = null
+invulnerable = null
 
 [node name="Score" type="Label" parent="."]
 margin_left = 17.0
