@@ -49,53 +49,53 @@ export (bool) var invulnerable = false
 
 func _ready():
    
-	pass # Replace with function body.
+    pass # Replace with function body.
 
 
 func move():
-	velocity = move_and_slide(velocity)
+    velocity = move_and_slide(velocity)
 
 func _integrate_forces(state):
-	pass
-	
+    pass
+    
 func _process(delta):
-	$HealthBar.value = health
-	
+    $HealthBar.value = health
+    
 func _physics_process(delta):
-	pass
-	
-	
+    pass
+    
+    
 func die():
-	var explosion = EXPLOSION.instance()  
-	explosion.position = position
-	get_tree().root.get_child(0).add_child(explosion)
-	
-	# Add points to the total
-	GameState.points += pointsOnDeath
-	
-	queue_free()
+    var explosion = EXPLOSION.instance()  
+    explosion.position = position
+    get_tree().root.get_child(0).add_child(explosion)
+    
+    # Add points to the total
+    GameState.points += pointsOnDeath
+    
+    queue_free()
 
 
 func handle_hit(hit_damage, hit_direction = Vector2.ZERO, hit_mass=0):
 
-	if(invulnerable): return
-	
-	if !$HitAudio.is_playing():
-		$HitAudio.stream = hitAudio
-		$HitAudio.play()
+    if(invulnerable): return
+    
+    if !$HitAudio.is_playing():
+        $HitAudio.stream = hitAudio
+        $HitAudio.play()
 
-	velocity += hit_direction*100*hit_mass/mass        # calculate knockback
-	health -= hit_damage 
-	health = clamp(health,0,maxHealth)
-	if(health == 0):
-		die()
+    velocity += hit_direction*100*hit_mass/mass        # calculate knockback
+    health -= hit_damage 
+    health = clamp(health,0,maxHealth)
+    if(health == 0):
+        die()
 
 func set_velocity(value):
-	velocity = value.clamped(max_global_speed)
-	
+    velocity = value.clamped(max_global_speed)
+    
 func set_max_health(value):
-	maxHealth = value
-	$HealthBar.set_max(maxHealth)
-	if health>maxHealth :
-		health = maxHealth
-	
+    maxHealth = value
+    $HealthBar.set_max(maxHealth)
+    if health>maxHealth :
+        health = maxHealth
+    
