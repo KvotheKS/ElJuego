@@ -92,15 +92,15 @@ margin_bottom = -26.0
 step = 1.0
 value = 100.0
 
-[node name="DashDustE" parent="." index="4" instance=ExtResource( 4 )]
+[node name="JetpackAudio" type="AudioStreamPlayer2D" parent="." index="4"]
+
+[node name="DashDustE" parent="." index="5" instance=ExtResource( 4 )]
 show_behind_parent = true
 position = Vector2( 0, 23 )
 emitting = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 anims/Invulnerability = SubResource( 4 )
 anims/RESET = SubResource( 5 )
-
-[node name="JetpackAudio" type="AudioStreamPlayer2D" parent="." index="7"]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

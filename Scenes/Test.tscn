@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Sprites/World/background.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/CameraBehavior/Camera.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/UI/PlayerUI.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -47,12 +48,6 @@ maxHealth = 0.0
 [node name="SingleShooter" parent="." instance=ExtResource( 6 )]
 position = Vector2( 264, 251 )
 
-[node name="Score" type="Label" parent="."]
-margin_left = 17.0
-margin_top = 14.0
-margin_right = 62.0
-margin_bottom = 28.0
-
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
@@ -69,5 +64,16 @@ scale = Vector2( 0.314815, 0.314815 )
 z_index = -1
 texture = ExtResource( 7 )
 centered = false
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="UI"]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 53.0
+margin_bottom = 54.0
+
+[node name="HealthBarTextured" parent="UI" instance=ExtResource( 10 )]
+position = Vector2( 8, 8 )
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
