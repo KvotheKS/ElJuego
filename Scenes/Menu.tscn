@@ -1,21 +1,27 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Menu.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/World/night_sky.jpeg" type="Texture" id=2]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
+[node name="NightSky" type="Sprite" parent="."]
+position = Vector2( 315, 190 )
+scale = Vector2( 0.660894, 0.660894 )
+texture = ExtResource( 2 )
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -34.0
-margin_right = 100.0
-margin_bottom = 34.0
+margin_left = -99.0
+margin_top = -33.0
+margin_right = 101.0
+margin_bottom = 35.0
 
 [node name="PlayBtn" type="Button" parent="VBoxContainer"]
 margin_right = 200.0
@@ -23,18 +29,77 @@ margin_bottom = 20.0
 focus_neighbour_top = NodePath("../QuitBtn")
 text = "Jogar"
 
-[node name="CreditsBtn" type="Button" parent="VBoxContainer"]
+[node name="QuitBtn" type="Button" parent="VBoxContainer"]
 margin_top = 24.0
 margin_right = 200.0
 margin_bottom = 44.0
-text = "Créditos"
-
-[node name="QuitBtn" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
-margin_right = 200.0
-margin_bottom = 68.0
 focus_neighbour_bottom = NodePath("../PlayBtn")
 text = "Sair"
+
+[node name="MenuTitle" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -37.5
+margin_top = 38.0
+margin_right = 62.5
+margin_bottom = 58.0
+text = "Game Over"
+
+[node name="Score" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -75.0
+margin_top = 97.0
+margin_right = 75.0
+margin_bottom = 117.0
+
+[node name="Nome" type="RichTextLabel" parent="."]
+modulate = Color( 0.85098, 0.733333, 0.356863, 1 )
+margin_left = 192.0
+margin_top = 329.0
+margin_right = 442.0
+margin_bottom = 359.0
+text = "Moisés Felipe Jacó Andrade de Lima"
+
+[node name="Nome2" type="RichTextLabel" parent="."]
+modulate = Color( 0.85098, 0.733333, 0.356863, 1 )
+margin_left = 331.0
+margin_top = 288.0
+margin_right = 531.0
+margin_bottom = 318.0
+text = "Mateus de Paula Rodrigues"
+
+[node name="Nome3" type="RichTextLabel" parent="."]
+modulate = Color( 0.85098, 0.733333, 0.356863, 1 )
+margin_left = 119.0
+margin_top = 288.0
+margin_right = 319.0
+margin_bottom = 318.0
+text = "Henrique Souza Moraes"
+
+[node name="Nome4" type="RichTextLabel" parent="."]
+modulate = Color( 0.85098, 0.733333, 0.356863, 1 )
+margin_left = 454.0
+margin_top = 248.0
+margin_right = 654.0
+margin_bottom = 278.0
+text = "Gustavo Tomás de Paula"
+
+[node name="Nome5" type="RichTextLabel" parent="."]
+modulate = Color( 0.85098, 0.733333, 0.356863, 1 )
+margin_left = 19.0
+margin_top = 248.0
+margin_right = 219.0
+margin_bottom = 278.0
+text = "Alexsander Correa de Oliveira"
+
+[node name="Nome6" type="RichTextLabel" parent="."]
+modulate = Color( 0.85098, 0.733333, 0.356863, 1 )
+margin_left = 240.0
+margin_top = 248.0
+margin_right = 440.0
+margin_bottom = 278.0
+text = "David Gonçalves Mendes"
 
 [connection signal="pressed" from="VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
