@@ -1,11 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://Scenes/Entities/Enemies/SGuardian.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Effects/DeathExplosion.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Entities/Player/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Entities/Enemies/SingleShooter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/CameraBehavior/Camera.tscn" type="PackedScene" id=9]
@@ -42,15 +39,6 @@ tile_data = PoolIntArray( -1, 0, 0, -65522, 0, 0, 65535, 0, 0, 14, 0, 0, 131071,
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
-
-[node name="SGuardian" parent="." instance=ExtResource( 3 )]
-position = Vector2( 399, 114 )
-maxHealth = 0.0
-
-[node name="DeathExplosion" parent="." instance=ExtResource( 4 )]
-
-[node name="SingleShooter" parent="." instance=ExtResource( 6 )]
-position = Vector2( 264, 251 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 1.5
