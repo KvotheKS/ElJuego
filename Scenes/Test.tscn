@@ -53,7 +53,7 @@ maxHealth = 0.0
 position = Vector2( 264, 251 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 autostart = true
 
 [node name="Spawner" parent="." instance=ExtResource( 8 )]

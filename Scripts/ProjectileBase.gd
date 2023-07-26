@@ -81,26 +81,22 @@ func die():
 	death()
 	queue_free()
 	
-func hanlde_hit():
+func handle_hit():
 	if(pierce > 0):
 		pierce -= 1
 	else:
 		die()
 		
 func _on_ProjectileBase_area_entered(area): #for hitting entities
-	
+
 	if(!canHit):
 		return
 	canHit = false
 	
-	hanlde_hit()
+	handle_hit()
 	var hit_direction = ((area.global_position - self.global_position).normalized() + self.velocity.normalized()).normalized()
 	area.get_parent().handle_hit(damage, hit_direction, mass)
 
-
-	
-   
-	
 func set_velocity(value):
 	velocity = value
-	velocity = velocity.clamped(max_global_speed)
+	velocity = velocity.limit_length(max_global_speed)

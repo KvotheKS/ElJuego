@@ -249,3 +249,10 @@ func calculate_jetpack_overheat(overheat: float,
 func handle_hit(hit_damage, hit_direction = Vector2.ZERO, hit_mass=0):
 	.handle_hit(hit_damage, hit_direction, hit_mass)
 	$AnimationPlayer.play("Invulnerability")
+
+func _on_HurtBox_area_entered(area):
+
+	# Collected Medkit
+	if (area.name == "PickupArea"):
+		health = clamp(health + area.get_parent().health, 0, maxHealth)
+	pass
