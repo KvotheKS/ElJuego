@@ -37,6 +37,9 @@ export(float) var areaMltiplier: float = 0
 # multiplicative modifier to projectile speed
 export(float) var projectileSpeedMultiplier:  float = 0
 
+# Chance to drop items on death
+export(float) var dropChance: float = 0.3
+
 # Audio that plays when hit
 var hitAudio = preload("res://Assets/Sounds/Hit3.wav")
 
@@ -75,10 +78,11 @@ func die():
 	# Add points to the total
 	GameState.points += pointsOnDeath
 	
-	# Enemies drop items on death
-	var pickup = pickups[randi() % pickups.size()].instance()
-	pickup.position = position
-	get_tree().root.get_child(0).call_deferred("add_child", pickup)
+	# Enemies have a chance to drop items on death
+	if (dropChance >= randf()):
+		var pickup = pickups[randi() % pickups.size()].instance()
+		pickup.position = position
+		get_tree().root.get_child(0).call_deferred("add_child", pickup)
 
 	queue_free()
 
