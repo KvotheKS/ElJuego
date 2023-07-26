@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Test.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Tileset/tileset.tres" type="TileSet" id=2]
@@ -6,17 +6,10 @@
 [ext_resource path="res://Scenes/Effects/DeathExplosion.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Entities/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Entities/Enemies/SingleShooter.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Sprites/World/bg_space.png" type="Texture" id=7]
+[ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/CameraBehavior/Camera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/UI/PlayerUI.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Sprites/World/bg_stars.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Sprites/World/bg_planets.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Sprites/World/bg_demonupperarm.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Sprites/World/bg_demonlowerarm.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Sprites/World/bg_demontorso.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Sprites/World/bg_frontarm.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Sprites/World/bg_platformarm.png" type="Texture" id=17]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -65,79 +58,7 @@ autostart = true
 
 [node name="Spawner" parent="." instance=ExtResource( 8 )]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="space" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0, 0 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/space"]
-position = Vector2( -320, -180 )
-z_index = -1
-texture = ExtResource( 7 )
-centered = false
-
-[node name="stars" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.1, 0.1 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/stars"]
-position = Vector2( -320, -180 )
-z_index = -1
-texture = ExtResource( 11 )
-centered = false
-
-[node name="planets" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 0.2 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/planets"]
-position = Vector2( -320, -180 )
-z_index = -1
-texture = ExtResource( 12 )
-centered = false
-
-[node name="demonlowerarm" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.86, 1 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/demonlowerarm"]
-position = Vector2( 329, 13 )
-z_index = -1
-texture = ExtResource( 14 )
-centered = false
-
-[node name="demonupperarm" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.88, 1 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/demonupperarm"]
-position = Vector2( 329, 13 )
-z_index = -1
-texture = ExtResource( 13 )
-centered = false
-
-[node name="demon" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.9, 1 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/demon"]
-position = Vector2( 329, 13 )
-z_index = -1
-texture = ExtResource( 15 )
-centered = false
-
-[node name="demonfrontarm" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.92, 1 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/demonfrontarm"]
-position = Vector2( 344, 12 )
-z_index = -1
-texture = ExtResource( 16 )
-centered = false
-
-[node name="demonplatform" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.96, 1 )
-
-[node name="sprite" type="Sprite" parent="ParallaxBackground/demonplatform"]
-position = Vector2( 381, -4 )
-z_index = -1
-texture = ExtResource( 17 )
-centered = false
+[node name="ParallaxBackground" parent="." instance=ExtResource( 7 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

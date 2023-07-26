@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Sprites/World/bg_demonupperarm.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/World/bg_platformarm.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/World/bg_planets.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/World/bg_stars.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/World/bg_demonlowerarm.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/World/bg_space.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/World/bg_demontorso.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/World/bg_frontarm.png" type="Texture" id=8]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="space" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 0 )
+
+[node name="sprite" type="Sprite" parent="space"]
+position = Vector2( -320, -180 )
+z_index = -1
+texture = ExtResource( 6 )
+centered = false
+
+[node name="stars" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="sprite" type="Sprite" parent="stars"]
+position = Vector2( -320, -180 )
+z_index = -1
+texture = ExtResource( 4 )
+centered = false
+
+[node name="planets" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 0.2 )
+
+[node name="sprite" type="Sprite" parent="planets"]
+position = Vector2( -320, -180 )
+z_index = -1
+texture = ExtResource( 3 )
+centered = false
+
+[node name="demonlowerarm" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.86, 1 )
+
+[node name="sprite" type="Sprite" parent="demonlowerarm"]
+position = Vector2( 329, 13 )
+z_index = -1
+texture = ExtResource( 5 )
+centered = false
+
+[node name="demonupperarm" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.88, 1 )
+
+[node name="sprite" type="Sprite" parent="demonupperarm"]
+position = Vector2( 329, 13 )
+z_index = -1
+texture = ExtResource( 1 )
+centered = false
+
+[node name="demon" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.9, 1 )
+
+[node name="sprite" type="Sprite" parent="demon"]
+position = Vector2( 329, 13 )
+z_index = -1
+texture = ExtResource( 7 )
+centered = false
+
+[node name="demonfrontarm" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.92, 1 )
+
+[node name="sprite" type="Sprite" parent="demonfrontarm"]
+position = Vector2( 344, 12 )
+z_index = -1
+texture = ExtResource( 8 )
+centered = false
+
+[node name="demonplatform" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.96, 1 )
+
+[node name="sprite" type="Sprite" parent="demonplatform"]
+position = Vector2( 381, -4 )
+z_index = -1
+texture = ExtResource( 2 )
+centered = false
