@@ -47,6 +47,9 @@ func _process(_delta):
 		$UI.get_child(0).text = str(GameState.points)
 		$UI.get_child(1).get_child(0).value = $Player.health      # Health at 0
 		$UI.get_child(1).get_child(1).value = $Player.jetpackHeat # Energy at 1
+	else:
+		GameState.gameOver = true
+		get_tree().change_scene("res://Scenes/Menu.tscn")
 	pass
   
 func get_player_position():
