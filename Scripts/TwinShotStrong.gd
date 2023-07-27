@@ -12,6 +12,7 @@ var deathEffect = preload("res://Scenes/Effects/SpriteBased/BulletBlastE.tscn")
 func _ready():
     damage = 20
     pierce = 10
+    mass = 200
     projectileSpeed = 2400
     $TowardtMB.init(projectileSpeed)
     pass # Replace with function body.

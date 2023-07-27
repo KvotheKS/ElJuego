@@ -33,71 +33,71 @@ var max_speed = 80
 var canHit = true
 
 func _ready():
-	$Duration.start(duration)
-	
+    $Duration.start(duration)
+    
 func _process(delta):
-	rotation = direction.angle()
-	if not $VisibilityNotifier2D.is_on_screen():
-		queue_free()
-	
+    rotation = direction.angle()
+    if not $VisibilityNotifier2D.is_on_screen():
+        queue_free()
+    
 func _physics_process(delta):
-	move(delta)
-	canHit=true
-	
+    move(delta)
+    canHit=true
+    
 ##################
 # Base Functions #
 ##################
 func UpdateStats():
-	damage = baseDamage 
+    damage = baseDamage 
 #    var l_scale = 1
 #
 #    $CollisionShape2D.scale = Vector2(l_scale,l_scale)
 
 func move(delta):
-	global_position += velocity*delta
-	
+    global_position += velocity*delta
+    
 
-	
+    
 #####################
 # Derived Functions #
 #####################
 # spawn effect of the projectile
 func spawn():
-	pass
+    pass
 # death effect of the projectile
 func death():
-	pass
+    pass
 
 
 func _on_Duration_timeout():
-	die()
-	
+    die()
+    
 
 func _on_ProjectileBase_body_entered(body): #for hiting terrain
-	if body.get_collision_layer() == 2:
-	   die()
+    if body.get_collision_layer() == 2:
+       die()
 
 
 func die():
-	death()
-	queue_free()
-	
+    death()
+    queue_free()
+    
 func handle_hit():
-	if(pierce > 0):
-		pierce -= 1
-	else:
-		die()
-		
+    if(pierce > 0):
+        pierce -= 1
+    else:
+        die()
+        
 func _on_ProjectileBase_area_entered(area): #for hitting entities
 
-	if(!canHit):
-		return
-	canHit = false
-	
-	handle_hit()
-	var hit_direction = ((area.global_position - self.global_position).normalized() + self.velocity.normalized()).normalized()
-	area.get_parent().handle_hit(damage, hit_direction, mass)
+    if(!canHit):
+        return
+    canHit = false
+    
+    handle_hit()
+    var hit_direction = ((area.global_position - self.global_position).normalized() + self.velocity.normalized()).normalized()
+    area.get_parent().handle_hit(damage, hit_direction, mass)
 
 func set_velocity(value):
-	velocity = value
-	velocity = velocity.limit_length(max_global_speed)
+    velocity = value
+    velocity = velocity.limit_length(max_global_speed)
