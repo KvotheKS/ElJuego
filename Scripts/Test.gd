@@ -11,7 +11,6 @@ var SINGLE_SHOOTER = preload("res://Scenes/Entities/Enemies/SingleShooter.tscn")
 var TURRET = preload("res://Scenes/Entities/Enemies/Turret.tscn")
 var KAMIKAZE = preload("res://Scenes/Entities/Enemies/Kamikaze.tscn")
 
-
 var difficulty = 0
 var spawn_num = 1
 
@@ -25,87 +24,90 @@ var enemies = []
 
 func _ready() -> void:
 
-    # Set random seed
-    rand_seed(OS.get_system_time_msecs())
+	# Set random seed
+	rand_seed(OS.get_system_time_msecs())
 
-    # Set possible spawn points
-    set_spawn()
+	# Set possible spawn points
+	set_spawn()
 
-    # Set possible enemies
-    enemies = [GUARDIAN, SINGLE_SHOOTER, TURRET, KAMIKAZE]
+	# Set possible enemies
+	enemies = [GUARDIAN, SINGLE_SHOOTER, TURRET, KAMIKAZE]
 
-    pass
+	# Play bg music
+	$Player/BackgroundMusic.play()
+
+	pass
 
 func timeout():
-    print("TIMEOUT")
-    return
+	print("TIMEOUT")
+	return
 
 func _process(_delta):
 
-    # Update UI
-    if ($Player != null):
-        $UI.get_child(0).text = str(GameState.points)
-        $UI.get_child(1).get_child(0).value = $Player.health      # Health at 0
-        $UI.get_child(1).get_child(1).value = $Player.jetpackHeat # Energy at 1
-    else:
-        GameState.gameOver = true
-        get_tree().change_scene("res://Scenes/Menu.tscn")
-    pass
+	# Update UI
+	if ($Player != null):
+		$UI.get_child(0).text = str(GameState.points)
+		$UI.get_child(1).get_child(0).value = $Player.health      # Health at 0
+		$UI.get_child(1).get_child(1).value = $Player.jetpackHeat # Energy at 1
+	else:
+		GameState.gameOver = true
+		get_tree().change_scene("res://Scenes/Menu.tscn")
+	pass
   
 func get_player_position():
-    if($Player): 
-        return $Player.position
-    else:
-        return null
+	if($Player): 
+		return $Player.position
+	else:
+		return null
 
 
 func set_spawn():
-    var top = Vector2(rand_range(MIN_X, MAX_X), MIN_Y)
-    var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
-    var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
-    var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
-    print(top)
-    print(bottom)
-    print(left)
-    print(right)
-    spawnPoints = [top, bottom, left, right]
-    
+	var top = Vector2(rand_range(MIN_X, MAX_X), MIN_Y)
+	var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
+	var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
+	var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
+	print(top)
+	print(bottom)
+	print(left)
+	print(right)
+	spawnPoints = [top, bottom, left, right]
+	
 func _unhandled_input(event):
-    if event.is_action_pressed("menu"):
-        get_tree().change_scene("res://Scenes/Menu.tscn")
-        GameState.points = 0
+	if event.is_action_pressed("menu"):
+		get_tree().change_scene("res://Scenes/Menu.tscn")
+		GameState.points = 0
 # Spawn more enemies
 func _on_SpawnTimer_timeout():
 
-    # Choose a random spawn point
-    var spawnPoint = spawnPoints[randi() % 4]
+	# Choose a random spawn point
+	var spawnPoint = spawnPoints[randi() % 4]
 
-    # Choose a random enemy to spawn
-    
-    
-    for i in range(spawn_num):
-        var enemy = enemies[randi() % enemies.size()].instance()
-        enemy.position = spawnPoint * i*2
-        add_child(enemy)
-    return
+	# Choose a random enemy to spawn
+	
+	
+	for i in range(spawn_num):
+		var enemy = enemies[randi() % enemies.size()].instance()
+		enemy.position = spawnPoint * i*2
+		add_child(enemy)
+	return
 
 
 func _on_DifficultyTimer_timeout():
-    set_difficulty(difficulty+1)
-    
+	set_difficulty(difficulty+1)
+	
 func set_difficulty(value):
-    match(value):
-        0:
-            $SpawnTimer.wait_time = 5
-            spawn_num = 1
-        1:
-            $SpawnTimer.wait_time = 3.2
-            spawn_num = 2
-        2:
-            $SpawnTimer.wait_time = 2.5
-            spawn_num = 3
-        _:  
-            $SpawnTimer.wait_time = 1
-            spawn_num = 3
-    
-    
+	match(value):
+		0:
+			$SpawnTimer.wait_time = 5
+			spawn_num = 1
+		1:
+			$SpawnTimer.wait_time = 3.2
+			spawn_num = 2
+		2:
+			$SpawnTimer.wait_time = 2.5
+			spawn_num = 3
+		_:  
+			$SpawnTimer.wait_time = 1
+			spawn_num = 3
+	
+	
