@@ -10,7 +10,7 @@ extends "res://Scripts/ProjectileBase.gd"
 var deathEffect = preload("res://Scenes/Effects/SpriteBased/BulletBlastE.tscn")
 
 func _ready():
-    pierce = 1
+    pierce = 0
     damage = 10
     projectileSpeed = 1000
     $TowardtMB.init(projectileSpeed)
