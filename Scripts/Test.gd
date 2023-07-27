@@ -11,6 +11,10 @@ var SINGLE_SHOOTER = preload("res://Scenes/Entities/Enemies/SingleShooter.tscn")
 var TURRET = preload("res://Scenes/Entities/Enemies/Turret.tscn")
 var KAMIKAZE = preload("res://Scenes/Entities/Enemies/Kamikaze.tscn")
 
+
+var difficulty = 0
+var spawn_num = 1
+
 const MIN_X = 30
 const MIN_Y = 30
 const MAX_X = 740
@@ -25,11 +29,7 @@ func _ready() -> void:
     rand_seed(OS.get_system_time_msecs())
 
     # Set possible spawn points
-    var top = Vector2(rand_range(MIN_X, MAX_X), MIN_Y)
-    var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
-    var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
-    var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
-    spawnPoints = [top, bottom, left, right]
+    set_spawn()
 
     # Set possible enemies
     enemies = [GUARDIAN, SINGLE_SHOOTER, TURRET, KAMIKAZE]
@@ -58,6 +58,18 @@ func get_player_position():
     else:
         return null
 
+
+func set_spawn():
+    var top = Vector2(rand_range(MIN_X, MAX_X), MIN_Y)
+    var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
+    var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
+    var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
+    spawnPoints = [top, bottom, left, right]
+    
+func _unhandled_input(event):
+    if event.is_action_pressed("menu"):
+        get_tree().change_scene("res://Scenes/Menu.tscn")
+        GameState.points = 0
 # Spawn more enemies
 func _on_SpawnTimer_timeout():
 
@@ -65,13 +77,31 @@ func _on_SpawnTimer_timeout():
     var spawnPoint = spawnPoints[randi() % 4]
 
     # Choose a random enemy to spawn
-    var enemy = enemies[randi() % enemies.size()].instance()
-    enemy.position = spawnPoint
-
-    add_child(enemy)
+    
+    
+    for i in range(spawn_num):
+        var enemy = enemies[randi() % enemies.size()].instance()
+        enemy.position = spawnPoint
+        add_child(enemy)
     return
 
-func _unhandled_input(event):
-    if event.is_action_pressed("menu"):
-        get_tree().change_scene("res://Scenes/Menu.tscn")
-        GameState.points = 0
+
+func _on_DifficultyTimer_timeout():
+    set_difficulty(difficulty+1)
+    
+func set_difficulty(value):
+    match(value):
+        0:
+            $SpawnTimer.wait_time = 5
+            spawn_num = 1
+        1:
+            $SpawnTimer.wait_time = 3.2
+            spawn_num = 2
+        2:
+            $SpawnTimer.wait_time = 2.5
+            spawn_num = 3
+        _:  
+            $SpawnTimer.wait_time = 1
+            spawn_num = 4
+    
+    

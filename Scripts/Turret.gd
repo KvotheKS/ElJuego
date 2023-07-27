@@ -23,9 +23,11 @@ func _ready():
     hitAudio = preload("res://Assets/Sounds/Hit3.wav")
 
     pass
-
+func _physics_process(delta):
+    $Sprite.rotation_degrees += 15*delta
+    
 func _process(delta):
-
+    
     # Turret always looks at the player
     var playerPosition = stage.get_player_position()
 
