@@ -19,7 +19,7 @@ margin_bottom = -17.0
 
 [node name="Kamikaze" type="Sprite" parent="." index="1"]
 position = Vector2( 1.19209e-07, 2.38419e-07 )
-scale = Vector2( 0.0897727, 0.0897727 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]

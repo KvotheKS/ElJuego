@@ -17,24 +17,24 @@ var _cooldownTimer = 0.0
 var stage
 
 func _ready():
-	set_max_health(35)
-	pointsOnDeath = 200
-	stage = get_tree().get_root().get_node("Test")
-	hitAudio = preload("res://Assets/Sounds/Hit3.wav")
+    set_max_health(35)
+    pointsOnDeath = 200
+    stage = get_tree().get_root().get_node("Test")
+    hitAudio = preload("res://Assets/Sounds/Hit3.wav")
 
-	pass
+    pass
 
 func _process(delta):
 
-	# Turret always looks at the player
-	var playerPosition = stage.get_player_position()
+    # Turret always looks at the player
+    var playerPosition = stage.get_player_position()
 
-	if (playerPosition == null):
-		return
+    if (playerPosition == null):
+        return
 
-	_cooldownTimer += delta
-	if _cooldownTimer >= 1.0 / _shotsPerSecond:
-		_cooldownTimer = 0
+    _cooldownTimer += delta
+    if _cooldownTimer >= 1.0 / _shotsPerSecond:
+        _cooldownTimer = 0
 
-	else:
-		$SingleShooterBlaster.fire(playerPosition)
+    else:
+        $SingleShooterBlaster.fire(playerPosition)
