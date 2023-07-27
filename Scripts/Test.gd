@@ -64,6 +64,10 @@ func set_spawn():
     var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
     var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
     var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
+    print(top)
+    print(bottom)
+    print(left)
+    print(right)
     spawnPoints = [top, bottom, left, right]
     
 func _unhandled_input(event):
@@ -81,7 +85,7 @@ func _on_SpawnTimer_timeout():
     
     for i in range(spawn_num):
         var enemy = enemies[randi() % enemies.size()].instance()
-        enemy.position = spawnPoint
+        enemy.position = spawnPoint * i*2
         add_child(enemy)
     return
 
@@ -102,6 +106,6 @@ func set_difficulty(value):
             spawn_num = 3
         _:  
             $SpawnTimer.wait_time = 1
-            spawn_num = 4
+            spawn_num = 3
     
     
