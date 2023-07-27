@@ -1,3 +1,8 @@
+# This Script controls the behavior of all projectiles.
+
+# -- TO DO --
+# - abily to increase damage based on parent weapon level, for enemy variations and, for player power level
+
 extends Area2D
 
 var direction = Vector2(1,0)
@@ -9,7 +14,7 @@ var damage = baseDamage
 # base projectile speed of all projectiles
 export var baseProjectileSpeed = 200
 var projectileSpeed = baseProjectileSpeed
-
+export var mass = 50
 # base duration of all player projectiles
 export(float) var duration: float = 1
 
@@ -20,15 +25,24 @@ var pierce = base_pierce
 # multiplicative modifier to duration
 export(float) var durationMultiplier: float = 0
 
+var velocity = Vector2.ZERO setget set_velocity
+var max_global_speed = 5000
+var max_speed = 80
+
 #var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
+var canHit = true
 
 func _ready():
-    $Duration.wait_time = duration
+    $Duration.start(duration)
     
 func _process(delta):
     rotation = direction.angle()
     if not $VisibilityNotifier2D.is_on_screen():
         queue_free()
+    
+func _physics_process(delta):
+    move(delta)
+    canHit=true
     
 ##################
 # Base Functions #
@@ -39,15 +53,10 @@ func UpdateStats():
 #
 #    $CollisionShape2D.scale = Vector2(l_scale,l_scale)
 
-func die():
-    death()
-    queue_free()
+func move(delta):
+    global_position += velocity*delta
     
-func hanlde_hit():
-    if(pierce > 0):
-        pierce -= 1
-    else:
-        die()
+
     
 #####################
 # Derived Functions #
@@ -64,10 +73,31 @@ func _on_Duration_timeout():
     die()
     
 
-func _on_ProjectileBase_body_entered(body):
-    die()
+func _on_ProjectileBase_body_entered(body): #for hiting terrain
+    if body.get_collision_layer() == 2:
+       die()
+
+
+func die():
+    death()
+    queue_free()
     
-func _on_ProjectileBase_area_entered(area):
-    if(area.get_collision_layer() == 1):
-        hanlde_hit()
-        area.get_parent().handle_damage(damage)
+func handle_hit():
+    if(pierce > 0):
+        pierce -= 1
+    else:
+        die()
+        
+func _on_ProjectileBase_area_entered(area): #for hitting entities
+
+    if(!canHit):
+        return
+    canHit = false
+    
+    handle_hit()
+    var hit_direction = ((area.global_position - self.global_position).normalized() + self.velocity.normalized()).normalized()
+    area.get_parent().handle_hit(damage, hit_direction, mass)
+
+func set_velocity(value):
+    velocity = value
+    velocity = velocity.limit_length(max_global_speed)

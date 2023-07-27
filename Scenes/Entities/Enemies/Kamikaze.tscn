@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/Entities/Enemies/EnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/kamikaze.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Kamikaze.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Weapons/KamikazeBlaster.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.0
+
+[node name="Kamikaze" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="HealthBar" parent="." index="0"]
+margin_top = -22.0
+margin_bottom = -17.0
+
+[node name="Kamikaze" type="Sprite" parent="." index="1"]
+position = Vector2( 1.19209e-07, 2.38419e-07 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+shape = SubResource( 2 )
+
+[node name="KamikazeBlaster" parent="." index="5" instance=ExtResource( 4 )]
+
+[node name="ExplosionTimer" type="Timer" parent="." index="6"]
+process_mode = 0
+wait_time = 0.75
+
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_CountdownTimer_timeout"]

@@ -1,7 +1,10 @@
+# This script controls a standard medium enemy bullet.
+# -inherits from ProjectileBase, if any function shows up here it should probably be on Projectile Base.
+
+
 extends "res://Scripts/ProjectileBase.gd"
 
-
-var deathEffect = preload("res://Scenes/Effects/BulletBlastE.tscn")
+var deathEffect = preload("res://Scenes/Effects/SpriteBased/BulletBlastE.tscn")
 
 func _ready():
     $TowardtMB.init(projectileSpeed)

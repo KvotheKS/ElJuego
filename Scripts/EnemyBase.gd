@@ -1,16 +1,5 @@
+# This script controls the base node for enemies, it should contain functions that apply for every enemy in the game.
+# - if any function shows up here and on Player it should probably be in EntityBase.
+
+
 extends "res://Scripts/Entity.gd"
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass

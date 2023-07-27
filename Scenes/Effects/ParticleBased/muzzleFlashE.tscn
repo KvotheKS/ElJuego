@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Sprites/Projectiles/shortline.png" type="Texture" id=1]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.580645, 1 )
+colors = PoolColorArray( 0.171232, 0.767292, 0.769043, 1, 1, 1, 1, 1, 0.989853, 1, 0.257813, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.218182 ), 0.0, 0.654978, 0, 0, Vector2( 0.191011, 1 ), 10.1136, -0.0385284, 0, 0, Vector2( 1, 0.204545 ), -1.66442, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+flag_align_y = true
+flag_disable_z = true
+spread = 23.16
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 207.92
+initial_velocity_random = 0.52
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.5
+scale_curve = SubResource( 3 )
+color_ramp = SubResource( 5 )
+
+[node name="muzzleFlashE" type="Particles2D"]
+modulate = Color( 2, 2, 1.5, 1 )
+show_behind_parent = true
+emitting = false
+lifetime = 0.15
+one_shot = true
+preprocess = 0.02
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
