@@ -19,7 +19,7 @@ glow_hdr_threshold = 1.9
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 106, 125 )
+position = Vector2( 471, 54 )
 
 [node name="Camera" parent="Player" instance=ExtResource( 9 )]
 current = true
@@ -31,7 +31,7 @@ smoothing_enabled = true
 smoothing_speed = 10.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="Player/Camera"]
-position = Vector2( 201, 6 )
+position = Vector2( -1, 45 )
 stream = ExtResource( 3 )
 volume_db = 3.681
 

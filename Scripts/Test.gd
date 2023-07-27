@@ -14,10 +14,10 @@ var KAMIKAZE = preload("res://Scenes/Entities/Enemies/Kamikaze.tscn")
 var difficulty = 0
 var spawn_num = 1
 
-const MIN_X = 30
-const MIN_Y = 30
-const MAX_X = 740
-const MAX_Y = 260
+const MIN_X = 100
+const MIN_Y = 100
+const MAX_X = 400
+const MAX_Y = 100
 
 var spawnPoints = []
 var enemies = []
@@ -28,7 +28,7 @@ func _ready() -> void:
     rand_seed(OS.get_system_time_msecs())
 
     # Set possible spawn points
-    set_spawn()
+#    set_spawn()
 
     # Set possible enemies
     enemies = [GUARDIAN, SINGLE_SHOOTER, TURRET, KAMIKAZE]
@@ -61,16 +61,13 @@ func get_player_position():
         return null
 
 
-func set_spawn():
-    var top = Vector2(rand_range(MIN_X, MAX_X), MIN_Y)
-    var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
-    var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
-    var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
-    print(top)
-    print(bottom)
-    print(left)
-    print(right)
-    spawnPoints = [top, bottom, left, right]
+#func set_spawn():
+#    var top = Vector2(rand_range(MIN_X, MAX_X), MIN_Y)
+#    var bottom = Vector2(rand_range(MIN_X, MAX_X), MAX_Y)
+#    var left = Vector2(MIN_X, rand_range(MIN_Y, MAX_Y))
+#    var right = Vector2(MAX_X, rand_range(MIN_Y, MAX_Y))
+#
+#    spawnPoints = [top, bottom, left, right]
     
 func _unhandled_input(event):
     if event.is_action_pressed("menu"):
@@ -80,14 +77,13 @@ func _unhandled_input(event):
 func _on_SpawnTimer_timeout():
 
     # Choose a random spawn point
-    var spawnPoint = spawnPoints[randi() % 4]
+#    var spawnPoint = spawnPoints[randi() % 4]
 
     # Choose a random enemy to spawn
     
-    
     for i in range(spawn_num):
         var enemy = enemies[randi() % enemies.size()].instance()
-        enemy.position = spawnPoint * i*2
+        enemy.global_position = Vector2(randi()%900 + 100,100) 
         add_child(enemy)
     return
 
